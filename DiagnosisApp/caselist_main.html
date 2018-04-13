@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+
+	</head>
+
+	<body>
+		<div id="div_head" class="mui-bar mui-bar-nav" style="background-color:#3188DE; ">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+			<h1 id="headertitle" class="mui-title" style="color: white;">会诊列表</h1>
+			<div onclick="show()" style="font-size: 22px; color: white;" class="mui-icon mui-action-menu mui-icon-search mui-pull-right"></div>
+		</div>
+
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript">
+		var title = null;
+
+		//启用双击监听
+		mui.init({
+			gestureConfig: {
+				doubletap: true
+			},
+			subpages: [{
+				url: 'caselist_sub.html?type=' + getQueryString2("type") + "&invitedtype=" + getQueryString2("invitedtype"),
+				id: 'caselistsub',
+				styles: {
+					top: '45px',
+					bottom: '0px',
+				}
+
+			}]
+		});
+		var contentWebview = null;
+		jQuery('#div_head').on('tap', function() {
+			if(mui.os.plus) {
+				if(contentWebview == null) {
+					contentWebview = plus.webview.currentWebview().children()[0];
+				}
+				contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+			}
+
+		});
+
+		function show() {
+			if(navigator.userAgent.indexOf("Html5Plus") < 0) { //不支持5+ API
+				window.frames["caselistsub"].close();
+			} else { //支持5+ API
+				if(contentWebview == null) {
+					contentWebview = plus.webview.currentWebview().children()[0];
+				}
+				contentWebview.evalJS("showdiag()");
+
+			}
+		}
+
+		mui.back = function() {
+			if(navigator.userAgent.indexOf("Html5Plus") < 0) { //不支持5+ API
+				jump('index.html', 'index.html', {
+
+				});
+			} else { //支持5+ API
+				plus.webview.getWebviewById("index.html").evalJS("Number()");
+				plus.webview.close("caselist");
+			}
+		};
+		//var contentWebview = null;
+		//document.querySelector('header').addEventListener('doubletap',function () {
+		//if(contentWebview==null){
+		//contentWebview = plus.webview.currentWebview().children()[0];
+		//}
+		//contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+		//});
+
+		function refresh() {
+			console.log("返回刷新中");
+
+			var contentWebview;
+			if(navigator.userAgent.indexOf("Html5Plus") < 0) { //不支持5+ API
+				//window.frames["index_sub.html"].close();
+			} else { //支持5+ API
+				if(contentWebview == null) {
+					contentWebview = plus.webview.currentWebview().children()[0];
+				}
+				contentWebview.evalJS("refreshData()");
+
+			}
+		}
+
+		function changeHead(sum) {
+			var text;
+			if(title == null)
+				title = jQuery("#headertitle").text();
+			text = title;
+			text += "(" + sum + ")";
+			jQuery("#headertitle").text(text);
+		}
+	</script>
+
+</html>

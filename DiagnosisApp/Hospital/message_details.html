@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+
+		<link href="../css/mystyle.css" rel="stylesheet">
+		<link rel="stylesheet" href="hos-css/message_details.css" />
+	</head>
+
+	<body>
+
+
+		<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable mui-slide-in" style="z-index: 99; ">
+			<!--菜单部分-->
+						
+			<div class="mui-inner-wrap">
+				<div class="mui-off-canvas-backdrop"></div>
+				<header class="mui-bar mui-bar-nav" style="background-color:#3188DE; ">
+					<a style="color: white;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"> </a>
+					<h1 class="mui-title" style="color: white;" id="statustitle">留言对话</h1>			
+				</header>
+				
+				
+				<div class="mui-content" style="background-color: white">
+					<div id="slider" class="mui-slider mui-fullscreen">
+
+					<div id="sliderProgressBar" class="mui-slider-progress-bar" style="width:25%;"></div>
+						<div class="mui-slider-group">
+
+							<div id="item4mobile" class="mui-slider-item mui-control-content">
+								<div id="scroll4" class="mui-scroll-wrapper">
+									<div class="mui-scroll" id="xsroll">
+										<div class="mui-content2">
+											<pre id='h'></pre>
+											<div id="msg-list" style="overflow-y: auto;-webkit-overflow-scrolling : touch;  ">
+												<div class="mui-loading">
+													<div class="mui-spinner">
+														
+													</div>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+
+								</div>
+
+							</div>
+						
+						
+						
+						
+						</div>
+					</div>
+
+				</div>
+				
+		<footer id="footerid" >
+				<div class="footer-left" >
+					<i id='msg-image' class="mui-icon " style="font-size: 28px;"></i>
+				</div>
+				<div class="footer-center" style="margin-left:-40px ;">
+					<textarea id='msg-text' type="text" class='input-text'></textarea>
+					<button id='msg-sound' type="button" class='input-sound' style="display: none;">按住说话</button>
+				</div>
+				<label for="" class="footer-right">
+				<i id='msg-type' class="mui-icon mui-icon-paperplane"></i>
+			</label>
+		</footer>
+				
+	 </div>
+			
+
+	</div>
+
+</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="hos-js/common.js"></script>
+		<script src="../js/mui.lazyload.js"></script>
+		<script src="../js/mui.lazyload.img.js"></script>
+		<script type="text/javascript" src="hos-js/message_details.js" ></script>
+		
+	</body>
+
+</html>

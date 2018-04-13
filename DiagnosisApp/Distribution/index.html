@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>KFBIO病理远程会诊平台</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/iconfont.css" />
+	</head>
+
+	<body style="background: white;">
+
+		<header class="mui-bar mui-bar-nav" style="background-color:#3188DE; ">
+			<h1 id="title" class="mui-title" style="color: white;">KFBIO病理远程会诊平台</h1>
+		</header>
+
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	<!--<script src="../js/common.js"></script>-->
+
+	<script type="text/javascript" src="Controller/distributionApi.js"></script>
+	<script type="text/javascript" src="Controller/const.js"></script>
+	<script>
+		mui.init({
+			gestureConfig: {
+				doubletap: true
+			},
+			subpages: [{
+				url: 'index_sub.html',
+				id: indexSubContentId,
+				styles: {
+					top: '44px',
+					bottom: '0px',
+				}
+			}]
+		});
+
+		// callback function
+		/*function pulldownRefresh() {
+			console.log("刷新Index");
+			var contentWebview;
+			if(navigator.userAgent.indexOf("Html5Plus") < 0) { //不支持5+ API
+			} else { //支持5+ API
+				if(contentWebview == null) {
+					contentWebview = plus.webview.currentWebview().children()[0];
+				}
+				contentWebview.evalJS("pulldownRefresh()");
+			}
+		}*/
+
+		$(function() {
+			var user = getUser();
+			var centerName = user.centerName == null ? 'KFBIO病理远程会诊平台' : user.centerName;
+			console.log('Index: CenterName = ' + centerName);
+			$('#title').text(centerName);
+		})
+
+		function getUser() {
+
+			// 初始化一个user对象用于获取需要的值
+			var userString = localStorage.getItem('userInfo');
+			var user = userString ? window.eval('(' + userString + ')') : '';
+
+			return user;
+		}
+	</script>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<link rel="stylesheet" href="hos-css/message_case_sub.css" />
+
+	</head>
+
+	<body>
+
+		
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div>
+					
+					
+					<div>
+						<!--数据列表-->
+						<ul class="mui-table-view mui-table-view-chevron" id="xlistt">
+
+						</ul>
+						<div id="div_loading" align="center" style="display: none;">
+							<div class="mui-pull-loading mui-icon mui-spinner mui-visibility"></div>
+							<div class="mui-pull-caption mui-pull-caption-refresh" style="font-weight: 700;color: #777;">正在加载...</div>
+						</div>
+						<p id="p_nomore" style="position:relative; bottom: 0px; z-index: 1; left: 50%; margin-left:-80px; display:none; color: #777;font-weight: 700;">没有更多会诊信息</p>
+
+					</div>
+				</div>
+				<input type="hidden" id="hidden_siteid" />
+				<input type="hidden" id="hidden_consultStatus" value="" />
+				<input type="hidden" id="hidden_caseStatus" value="" />
+				<input type="hidden" id="hidden_invt" value="" />
+			</div>
+			
+		</div>
+		
+		<div id="div_head" class="mui-bar mui-bar-nav" style="background-color:#3188DE; display: none;  ">
+
+			<h1 id="headertitle" class="mui-title" style="color: white;">会诊列表</h1>
+			<div onclick="showdiag()" style="font-size: 22px; color: white;" class="mui-icon mui-action-menu mui-icon-search mui-pull-right"></div>
+		</div>
+		<div id="topPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view" id="sitelist">
+
+					</ul>
+				</div>
+			</div>
+
+		</div>
+
+		
+		<script src="../js/mui.min.js "></script>
+		<script src="../js/mui.picker.min.js "></script>
+
+		<script src="../js/mui.poppicker.js"></script>
+		<script src="../js/jquery-1.11.0.js " type="text/javascript " charset="utf-8 "></script>
+		<script type="text/javascript" src="hos-js/common.js"></script>
+		<script type="text/javascript" src="hos-js/message_case_sub.js" ></script>
+		
+	</body>
+
+</html>

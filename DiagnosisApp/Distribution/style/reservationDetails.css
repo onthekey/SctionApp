@@ -1,0 +1,10 @@
+.case_content_report p {
+	margin-bottom: 4px;
+	color: #505050;
+}
+
+.case_content_report li h6 {
+	font-size: 16px;
+	color: #51c4d4;
+	line-height: 20px;
+}

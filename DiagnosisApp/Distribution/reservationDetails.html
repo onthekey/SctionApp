@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+		<link href="../css/mystyle.css" rel="stylesheet">
+		<link href="../fonts/iconfont.css" rel="stylesheet">
+		<link rel="stylesheet" href="../css/font-awesome.min.css" />
+		
+		<link rel="stylesheet" href="base/iconfont/material-icons.css" />
+		
+		<link rel="stylesheet" href="widget/expertList_view.css" />
+		<link rel="stylesheet" href="style/reservationDetails.css" />
+	</head>
+
+	<body style="background-color: white;">
+		<header class="mui-bar mui-bar-nav" style="background-color:#3188DE;">
+			<a style="color: white;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"> </a>
+			<h1 id="reservation_details_title" class="mui-title" style="color: white;">预约信息</h1>
+		</header>
+		<div id="details_layout" class="mui-content" style="background-color: white; position: relative;">
+			<form class="mui-input-group" id="explist">
+				<div class="mui-loading" id="LoadingAnimation">
+					<div class="mui-spinner">
+					</div>
+				</div>
+				<div id="reservation_details" style="display: none;">
+					<ul class="case_content_report">
+						<li style="margin: 0px 15px; padding: 2px 0px;">
+							<h6>基本信息</h6>
+							<p><span>患者信息：</span><span id="span_info"></span></p>
+							<p><span>送检单位：</span><span id="span_his"></span></p>
+							<p><span>预约时间：</span><span id="span_reservation_date"></span></p>
+							<p><span>手术部位：</span><span id="span_operation_part"></span></p>
+							<p><span>临床医生：</span><span id="span_yuDoctor"></span></p>
+							<p><span>临床电话：</span><span id="span_yuPhone"></span></p>
+						</li>
+						<li style="margin: 0px 15px;border-top: 1px solid #e7e7e7; padding: 2px 0px;">
+							<h6>备注</h6>
+							<p><span id="span_remark"></span></p>
+						</li>
+						<li id="retrun_layout" style="margin: 0px 15px;border-top: 1px solid #e7e7e7; padding: 2px 0px;">
+							<div style="padding: 4px;">
+								<textarea id="textarea_reason" style="margin: 0px;border: 1px solid rgba(0,0,0,.2);"
+									placeholder="退回理由"></textarea>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</form>
+
+			<div align="center" style="margin-top: 8px;" id="toolBar">
+				<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" id="returnReservation">
+					退回
+				</button> &nbsp;
+				<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" id="distribution">
+					分配
+				</button>
+			</div>
+		</div>
+
+		<div id="expertListlayout">
+			<div id="expertListView">
+				<!--ListView content -->
+			</div>
+			<div class="expertListActionBar">
+				<div class="layout_btn_reservationaction">
+					<button id="cancelReservation" class="btn_reservationaction">
+						<i class="material-icons">keyboard_return</i>
+						<div>
+							取消选择
+						</div>
+					</button>				
+				</div>
+				<div class="layout_btn_reservationaction">
+					<button id="doReservation" class="btn_reservationaction">
+						<i class="material-icons">create</i>
+						<div>
+							完成预约
+						</div>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script type="text/javascript" src="../js/common.js"></script>-->
+
+		<script type="text/javascript" src="Controller/distributionApi.js"></script>
+
+		<script type="text/javascript" src="Controller/const.js"></script>
+		<script type="text/javascript" src="Controller/UtilHelper.js"></script>
+		<script type="text/javascript" src="widget/expertList_view.js"></script>
+		<script type="text/javascript" src="lifecycle/lifecycle_constant.js"></script>
+		<script type="text/javascript" src="lifecycle/reservationDetails_lifecycle.js"></script>
+		<script type="text/javascript" src="Controller/reservationDetails_controller.js"></script>		
+	</body>
+</html>

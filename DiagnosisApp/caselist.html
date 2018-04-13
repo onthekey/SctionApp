@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" href="css/mystyle.css">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link href="fonts/iconfont.css" rel="stylesheet">
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			.mui-bar .mui-pull-left .mui-icon {
+				padding-right: 5px;
+				font-size: 28px;
+			}
+			.mui-bar .mui-btn {
+				font-weight: normal;
+				font-size: 17px;
+			}
+			.mui-bar .mui-btn-link {
+				top: 1px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<header id="header" class="mui-bar mui-bar-nav"  style="background-color:#3188DE; ">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" style="color: white;"> 会诊</h1>
+		</header>
+
+		<div class="mui-content">
+			<div class="mui-content mui-content-list">
+			<!--子菜单-->
+			<div class="sub-menu">
+				<ul class="sub-menu-list mui-col-xs-12 mui-pull-left">
+					<li id="changeRegion" class="mui-col-xs-6"><span>全部医院</span><span class="mui-icon iconfont icon-youxiasanjiao"></span><span class="iconfont icon-shuxian"></span></li>
+					<li id="screen" class="mui-col-xs-6">会诊状态<span class="mui-icon iconfont icon-youxiasanjiao"></span></li>
+				</ul>
+			</div>
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-media">
+				
+					<a class="mui-navigate-right" href="caseinfo.html">
+						<div class="mui-badge mui-badge-primary" style=" padding-top:6px;padding-bottom:6px;position: relative; left: 0px; top: 25px; margin-right: 5px ; font-size: 28px; float:left;" >常</div>
+						<div class="mui-media-body" >
+							
+							201008-王晓-27岁-男
+							<p class='mui-ellipsis'>取材部位：胃窦</p>
+							<p class='mui-ellipsis'>来自余姚人民医院</p>
+						</div>
+						<div class="mui-badge mui-badge-warning" style="top:10px;margin-right: -25px;">待诊断</div>
+						<div class="mui-badge mui-badge-warning" style=" top: 70px; margin-right: -25px;" >2016-06-06 12：00</div>
+					</a>
+						
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class='mui-navigate-right' href="caseinfo.html">
+						<div class="mui-badge mui-badge-success" style="padding-top:6px;padding-bottom:6px;position: relative; left: 0px; top: 25px; margin-right: 5px ; font-size: 28px; float:left;" >细</div>
+						<div class="mui-media-body">
+							
+							201008-王晓-27岁-男
+						<p class='mui-ellipsis'>取材部位：胃窦</p>
+							<p class='mui-ellipsis'>来自余姚人民医院</p>
+						</div>
+							<div class="mui-badge mui-badge-warning" style="top:10px;margin-right: -25px;">待诊断</div>
+						<div class="mui-badge mui-badge-warning" style=" top: 70px; margin-right: -25px;" >2016-06-06 12：00</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" href="caseinfo.html">
+						<div class="mui-badge mui-badge-warning" style="padding-top:6px;padding-bottom:6px;position: relative; left: 0px; top: 25px; margin-right: 5px ; font-size: 28px; float:left;" >冰</div>
+						<div class="mui-media-body">
+							
+							201008-王晓-27岁-男
+						<p class='mui-ellipsis'>取材部位：胃窦</p>
+							<p class='mui-ellipsis'>来自余姚人民医院</p>
+						</div>
+							<div class="mui-badge mui-badge-warning" style="top:10px;margin-right: -25px;">待诊断</div>
+						<div class="mui-badge mui-badge-warning" style=" top: 70px; margin-right: -25px;" >2016-06-06 12：00</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script>
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+			
+		
+		</script>
+
+	</body>
+
+</html>

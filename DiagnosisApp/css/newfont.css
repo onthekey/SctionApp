@@ -1,0 +1,33 @@
+
+@font-face {font-family: "newiconfont";
+ src:url('../fonts/newiconfont.ttf') format('truetype'); /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+}
+
+.newiconfont {
+  font-family:"newiconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.icon-tab:before { content: "\e603"; }
+
+.icon-dengdai16px:before { content: "\e708"; }
+
+.icon-dengdai:before { content: "\e6d8"; }
+
+.icon-dengdaijieguo:before { content: "\e673"; }
+
+.icon-fenpei:before { content: "\e670"; }
+
+.icon-duo:before { content: "\e604"; }
+
+.icon-dengdai2:before { content: "\e74c"; }
+
+.icon-dengdaibuchongziliao:before { content: "\e601"; }
+
+.icon-yiantaolun:before { content: "\e703"; }
+
+.icon-dengdai1:before { content: "\e65e"; }

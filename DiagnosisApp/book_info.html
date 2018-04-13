@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="css/mui.min.css">
+		<!--App自定义的css-->
+		<link href="css/mystyle.css" rel="stylesheet">
+		<link href="fonts/iconfont.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+
+	</head>
+	<style type="text/css">
+		.case_content_report p {
+			margin-bottom: 4px;
+			color: #505050;
+		}
+		
+		.case_content_report li h6 {
+			font-size: 16px;
+			color: #51c4d4;
+			line-height: 20px;
+		}
+	</style>
+
+	<body style="background-color: white;">
+
+		<header class="mui-bar mui-bar-nav" style="background-color:#3188DE; ">
+			<a style="color: white;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"> </a>
+			<h1 class="mui-title" style="color: white;">预约信息</h1>
+
+		</header>
+		<div class="mui-content" style="background-color: white; ">
+
+			<form class="mui-input-group" id="explist">
+				<div class="mui-loading" id="caseloading">
+					<div class="mui-spinner">
+					</div>
+				</div>
+				<div id="divcase" style="display: none;  ;">
+					<ul class="case_content_report">
+
+						<li style="margin: 0px 15px; padding: 2px 0px;">
+							<h6>基本信息</h6>
+							<p><span>患者信息：</span><span id="sp_info"></span></p>
+							<p><span>送检单位：</span><span id="sp_HisName"></span></p>
+							<p><span>预约时间：</span><span id="sp_BookTime"></span></p>
+							<p><span>手术部位：</span><span id="sp_OperationPart"></span></p>
+							<p><span>临床医生：</span><span id="sp_YuDoctor"></span></p>
+							<p><span>临床电话：</span><span id="sp_YuPhone"></span></p>
+						</li>
+						<li style="margin: 0px 15px;border-top: 1px solid #e7e7e7; padding: 2px 0px;">
+							<h6>备注</h6>
+							<p><span id="sp_bz"></span></p>
+						</li>
+						<li style="margin: 0px 15px;border-top: 1px solid #e7e7e7; padding: 2px 0px;">
+							<h6>退回理由</h6>
+							<div style="padding: 4px;">
+								<textarea id="txt_remark" style="margin: 0px;border: 1px solid rgba(0,0,0,.2); "></textarea>
+							</div>
+
+						</li>
+
+					</ul>
+				</div>
+			</form>
+
+			<div align="center" style="margin-top: 8px;" id="div_tool">
+				<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" id="ReturnBook">
+					退回申请
+				</button> &nbsp;
+				<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" id="ConfirmBook">
+					预约确认
+				</button>
+			</div>
+		</div>
+
+		<script src="js/mui.min.js"></script>
+		<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script>
+			LoadCase();
+
+			mui.init({
+				swipeBack: true, //启用右滑关闭功能
+				gestureConfig: {
+					tap: true, //默认为true
+					doubletap: true, //默认为false
+					longtap: true, //默认为false
+					swipe: true, //默认为true
+					drag: true, //默认为true
+					hold: true, //默认为false，不监听
+					release: true //默认为false，不监听
+				}
+			});
+			var deceleration = mui.os.ios ? 0.003 : 0.0009;
+			mui('#scroll1').scroll({
+				bounce: false,
+				indicators: true, //是否显示滚动条
+				deceleration: deceleration
+			});
+			mui.ready(function() {
+
+			});
+			var Returndata = [
+				'<div class="mui-input-row mui-radio mui-left">',
+				'<label>@DisplayName</label>',
+				'<input name="expradio" type="radio" value="@UserID">',
+				'</div>'
+			]
+
+			function LoadCase() {
+				console.log("入口");
+				var userInfo = localStorage.getItem("userInfo");
+				var user = userInfo ? window.eval("(" + userInfo + ")") : "";
+				jQuery.ajax(resturl + 'GetBookInfo', {
+					data: {
+						ConsultID: getQueryString2("ConsultID"),
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					cache: false,
+					success: function(data) {
+						jQuery("#caseloading").css("display", "none");
+						jQuery("#divcase").css("display", "");
+						var div = "";
+						data = eval(data);
+						if(data.length > 0) {
+							jQuery("#sp_info").html(data[0].YuName + " " + data[0].YuSex + " " + data[0].YuAge);
+							jQuery("#sp_HisName").html(data[0].HisName);
+							jQuery("#sp_BookTime").html(data[0].BookTime);
+							jQuery("#sp_OperationPart").html(data[0].OperationPart);
+							jQuery("#sp_YuDoctor").html(data[0].YuDoctor);
+							jQuery("#sp_YuPhone").html(data[0].YuPhone);
+							jQuery("#txt_remark").html(data[0].ReturnReason)
+							var bz = data[0].BookContent;
+							if(bz == "") {
+								bz = "无";
+							}
+							jQuery("#sp_bz").html(bz);
+							var ConsultStatusID = getQueryString2("ConsultStatusID");
+							if(ConsultStatusID == 99) {
+
+							} else if(ConsultStatusID == 100) {
+								jQuery("#txt_remark").attr("readonly", "readonly");
+								jQuery("#div_tool").css("display", "none");
+							} else if(ConsultStatusID == 101) {
+								jQuery("#div_tool").css("display", "none");
+								jQuery("#txt_remark").attr("readonly", "readonly");
+							}
+						}
+					}
+				});
+			}
+			document.getElementById("ReturnBook").addEventListener('tap', function() {
+
+				var btnArray = ['否', '是'];
+				mui.confirm('确定退回该预约申请吗？', '提示', btnArray, function(e) {
+					if(e.index == 1) {
+
+						var userInfo = localStorage.getItem("userInfo");
+						var user = userInfo ? window.eval("(" + userInfo + ")") : "";
+						var txt_remark = encodeURI(jQuery("#txt_remark").val().replace(/(<br[^>]*>|  |\s*)/g, ''))
+						if(txt_remark != "" && txt_remark != undefined) {
+							jQuery.ajax(resturl + 'ReturnBook', {
+								data: JSON.stringify({
+									ConsultID: getQueryString2("ConsultID"),
+									ReturnReason: txt_remark
+								}),
+								dataType: 'json', //服务器返回json格式数据
+								type: 'post', //HTTP请求类型
+								timeout: 10000, //超时时间设置为10秒；
+								cache: false,
+								success: function(data) {
+									console.log("退回预约操作中");
+									data = eval(data);
+									if(data == "1") {
+										if(navigator.userAgent.indexOf("Html5Plus") < 0) { //不支持5+ API
+											jump("book_main.html", 'booklist', {
+
+											});
+										} else { //支持5+ API
+											if(mui.os.ipad) {
+												console.log("刷新执行iPad");
+												//plus.webview.getWebviewById("booklist").reload();
+												// ipad端中booklist被直接载入到caselist的容器中
+												plus.webview.getWebviewById("caselist").reload();
+											} else {
+												if(!mui.os.android) {
+													console.log("刷新执行iOS");
+													//plus.webview.getWebviewById("booklist").reload();
+													plus.webview.getWebviewById("booklist").evalJS("refresh()");
+												} else {
+													plus.webview.getWebviewById("booklist").evalJS("refresh()");
+												}
+											}
+											mui.back();
+										}
+									} else {
+
+										mui.toast("提交异常！");
+									}
+								},
+								error: function(xhr, type, errorThrown) {
+									if(type == 'timeout') {
+										mui.toast("网络不给力，请重新操作！");
+									}
+								}
+							});
+						} else {
+							mui.toast("请填写退回理由！");
+						}
+					}
+				})
+			});
+			document.getElementById("ConfirmBook").addEventListener('tap', function() {
+
+				var btnArray = ['否', '是'];
+				mui.confirm('确定该预约申请吗？', '提示', btnArray, function(e) {
+					if(e.index == 1) {
+
+						var userInfo = localStorage.getItem("userInfo");
+						var user = userInfo ? window.eval("(" + userInfo + ")") : "";
+						jQuery.ajax(resturl + 'ConfirmBook', {
+							data: JSON.stringify({
+								ConsultID: getQueryString2("ConsultID"),
+							}),
+							dataType: 'json', //服务器返回json格式数据
+							type: 'post', //HTTP请求类型
+							timeout: 10000, //超时时间设置为10秒；
+							cache: false,
+							success: function(data) {
+								console.log("预约操作中");
+								data = eval(data);
+								if(data == "1") {
+									if(navigator.userAgent.indexOf("Html5Plus") < 0) { //不支持5+ API
+										jump("book_main.html", 'booklist', {
+
+										});
+									} else { //支持5+ API
+										if(mui.os.ipad) {
+											//plus.webview.getWebviewById("booklist").reload();
+											// ipad端中booklist被直接载入到caselist的容器中
+											plus.webview.getWebviewById("caselist").reload();
+										} else {
+											if(!mui.os.android) {
+												console.log("刷新执行iOS");
+												//plus.webview.getWebviewById("booklist").reload();
+												plus.webview.getWebviewById("booklist").evalJS("refresh()");
+											} else {
+												plus.webview.getWebviewById("booklist").evalJS("refresh()");
+											}
+										}
+										mui.back();
+									}
+								} else {
+									mui.toast("提交异常！");
+								}
+							},
+							error: function(xhr, type, errorThrown) {
+								if(type == 'timeout') {
+									mui.toast("网络不给力，请重新操作！");
+
+								}
+							}
+						});
+
+					}
+				})
+			});
+		</script>
+	</body>
+
+</html>

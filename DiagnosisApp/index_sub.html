@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/iconfont.css" />
+	</head>
+	
+	<style>
+		body {
+			background-color: #FFFFFF;
+		}
+	</style>
+
+	<body>
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="background: #FFFFFF;">
+			<div class="mui-content" style="background: white;">
+				<div id="slider" class="mui-slider" style="height: 180px; width: 100%;">
+					<div class="mui-slider-group mui-slider-loop">
+						<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#">
+								<img src="images/slider4.jpg" style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+						<!-- 第一张 -->
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="images/slider2.jpg" style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+						<!-- 第二张 -->
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="images/slider1.jpg" style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+						<!-- 第三张 -->
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="images/slider3.jpg" style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+						<!-- 第四张 -->
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="images/slider4.jpg" style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+						<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#">
+								<img src="images/slider2.jpg" style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+					</div>
+					<div class="mui-slider-indicator">
+						<div class="mui-indicator mui-active"></div>
+						<div class="mui-indicator"></div>
+						<div class="mui-indicator"></div>
+						<div class="mui-indicator"></div>
+					</div>
+				</div>
+				<ul class="mui-table-view mui-grid-view mui-grid-9" style="background: white;" id="list">
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" data-id="1" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon iconfont icon-fenpeizhenduanqingqiu"><span class="mui-badge" ID="sp_dzd">0</span></span>
+							<div class="mui-media-body">待诊断</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" data-id="97" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon iconfont icon-shenhe2"><span class="mui-badge " ID="sp_fh" >0</span></span>
+							<div class="mui-media-body">复核</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="caselist_mian.html" data-id="2" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon  iconfont icon-dedaozhenduanbaogao"><span class="mui-badge " ID="sp_yzd" style="background-color: #007aff">0</span></span>
+							<div class="mui-media-body">已诊断</div>
+						</a>
+					</li>
+
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="caselist_mian.html" data-id="3" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon iconfont icon-tuihuiyanshou"><span class="mui-badge" ID="sp_th" style="background-color: #007aff">0</span></span>
+							<div class="mui-media-body">退回</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="caselist_mian.html" data-id="98" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon iconfont icon-huizhen"><span class="mui-badge" ID="sp_sy" style="background-color: #007aff">0</span></span>
+							<div class="mui-media-body">受邀</div>
+						</a>
+					</li>
+
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" class="indexclass" data-id="96">
+							<span style="color: #1296db;" class="mui-icon iconfont icon-yuyuejiuzhen"><span class="mui-badge" ID="sp_yy" style="background-color: #007aff">0</span></span>
+							<div class="mui-media-body">预约</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="caselist_mian.html" data-id="99" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon iconfont icon-shoucangyishoucang"><span class="mui-badge" ID="sp_cc" style="background-color: #007aff">0</span></span>
+							<div class="mui-media-body">收藏</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" data-id="94" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon iconfont icon-ziyuantongji"></span>
+							<div class="mui-media-body">统计</div>
+						</a>
+					</li>
+
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" data-id="95" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon iconfont icon-shezhi"></span>
+							<div class="mui-media-body">设置</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+
+		<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/common.js"></script>
+		<script>
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					}
+
+				}
+			});
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+
+					Number();
+					//mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 1500);
+			}
+			var count = 0;
+
+			if(mui.os.plus) {
+				mui.plusReady(function() {
+					setTimeout(function() {
+						mui('#pullrefresh').pullRefresh().pulldownLoading();
+					}, 1000);
+					// 退出事件监听
+					exit();
+				});
+			} else {
+				mui.ready(function() {
+					mui('#pullrefresh').pullRefresh().pulldownLoading();
+					// 退出事件监听
+					exit();
+				});
+			}
+			
+			function windowLoad() {
+				console.log("windowLoad");
+				setTimeout(function() {
+						mui('#pullrefresh').pullRefresh().pulldownLoading();
+					}, 1000);
+			}
+			
+			function Number() {
+				console.log("index:" + resturl);
+				var userInfo = localStorage.getItem("userInfo");
+				var user = userInfo ? window.eval("(" + userInfo + ")") : "";
+				//console.log("userID:" + user.userid);
+				jQuery.ajax(resturl + "GetCount", {
+					data: {
+						UserID: user.userid
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(ret) {
+						ret = eval(ret);
+						$("#sp_dzd").html(ret[0].num1);
+						$("#sp_yzd").html(ret[0].num2);
+						$("#sp_yy").html(ret[0].BookNum);
+						$("#sp_th").html(ret[0].ReturnNum);
+						$("#sp_sy").html(ret[0].InviteNumber);
+						$("#sp_cc").html(ret[0].CollectNum);
+						$("#sp_fh").html(ret[0].ReviewerNum);
+						mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+					},
+					error: function(xhr, type, errorThrown) {
+						//超时处理
+						if(type == 'timeout') {}
+					}
+				});
+
+				console.log()
+			}
+			var slider = mui("#slider");
+			slider.slider({
+				interval: 3000
+			});
+			mui('#list').on('tap', '.indexclass', function() {
+				var id = this.getAttribute('data-id');
+				if(id == "96") {
+					jump('book_main.html?type=' + id, 'booklist', {
+
+					});
+				} else if(id == "95") {
+					jump('setting.html?type=' + id, 'setting', {
+
+					});
+				} else if(id == "94") {
+					jump('statistics.html?type=' + id, 'statistics', {
+
+					});
+				} else {
+
+					jump('caselist_main.html?type=' + id, 'caselist', {
+
+					});
+				}
+
+			});
+			
+			//退出应用操作,无需返回login页面
+			function exit() {
+				console.log('back Listener');
+				var exitMark = false;
+				mui.back = function () {
+					if (!exitMark) {
+						exitMark = true;
+						mui.toast('再按一次退出应用');
+						setTimeout(function() {
+							exitMark = false;
+						}, 2000);
+					} else {
+						plus.runtime.quit();
+					}
+				}
+			}
+		</script>
+	</body>
+
+</html>

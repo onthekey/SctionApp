@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+		<link href="../css/mystyle.css" rel="stylesheet">
+		<link href="../css/iconfont.css" rel="stylesheet">
+		<!--<link rel="stylesheet" href="../css/font-awesome.min.css" />-->
+		<link rel="stylesheet" href="hos-css/book_info_hospital.css" />
+		
+	</head>
+	
+
+	<body style="background-color: white;">
+
+		<header class="mui-bar mui-bar-nav" style="background-color:#3188DE; ">
+			<a style="color: white;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"> </a>
+			<h1 class="mui-title" style="color: white;">预约信息</h1>
+
+		</header>
+		<div class="mui-content" style="background-color: white; ">
+
+			<form class="mui-input-group" id="explist">
+				<div class="mui-loading" id="caseloading">
+					<div class="mui-spinner">
+					</div>
+				</div>
+				<div id="divcase" style="display: none;  ;">
+					<ul class="case_content_report">
+
+						<li style="margin: 0px 15px; padding: 2px 0px;">
+							<h6>基本信息</h6>
+							<p><span>患者信息：</span><span id="sp_info"></span></p>
+							<p><span>送检单位：</span><span id="sp_HisName"></span></p>
+							<p><span>预约时间：</span><span id="sp_BookTime"></span></p>
+							<p><span>手术部位：</span><span id="sp_OperationPart"></span></p>
+							<p><span>临床医生：</span><span id="sp_YuDoctor"></span></p>
+							<p><span>临床电话：</span><span id="sp_YuPhone"></span></p>
+						</li>
+						<li style="margin: 0px 15px;border-top: 1px solid #e7e7e7; padding: 2px 0px;">
+							<h6>备注</h6>
+							<p><span id="sp_bz"></span></p>
+						</li>
+						<li style="margin: 0px 15px;border-top: 1px solid #e7e7e7; padding: 2px 0px;">
+							<h6>退回理由</h6>
+							<div style="padding: 4px;">
+								<textarea id="txt_remark" style="margin: 0px;border: 1px solid rgba(0,0,0,.2); "></textarea>
+							</div>
+
+						</li>
+
+					</ul>
+				</div>
+			</form>
+
+			
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="hos-js/common.js"></script>
+		<script type="text/javascript" src="hos-js/book_info_hospital.js" ></script>
+		
+	</body>
+
+</html>

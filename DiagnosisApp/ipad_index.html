@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mystyle.css">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/iconfont.css" />
+
+	</head>
+	<style>
+		/*跨webview需要手动指定位置*/
+		
+		.mui-plus header.mui-bar {
+			display: none!important;
+		}
+		
+		.mui-plus .mui-bar-nav~.mui-content {
+			padding: 0!important;
+		}
+		
+		.mui-plus .plus {
+			display: inline;
+		}
+		
+		.plus {
+			display: none;
+		}
+		
+		#topPopover {
+			position: fixed;
+			top: 16px;
+			right: 6px;
+		}
+		
+		#topPopover .mui-popover-arrow {
+			left: auto;
+			right: 6px;
+		}
+		
+		p {
+			text-indent: 22px;
+		}
+		
+		span.mui-icon {
+			font-size: 14px;
+			color: #007aff;
+			margin-left: -15px;
+			padding-right: 10px;
+		}
+		
+		.mui-popover {
+			height: 230px
+		}
+		
+		.mui-btn {
+			font-size: 16px;
+			padding: 4px;
+			margin: 3px;
+		}
+		
+		.icon {
+			margin-left: -15px;
+			padding-right: 10px;
+			font-size: 20px;
+		}
+		
+		.mm {
+			padding: 12px;
+			font-size: 20px;
+		}
+		
+		#sp_displayname {
+			width: 140px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 1;
+			-webkit-box-orient: vertical;
+		}
+	</style>
+
+	<body>
+
+		<div style="left: 0px; top: 0px; width: 250px; height: 100%;background: white;  position: fixed;   " scrolling="no">
+			<div class="mui-content" style="height: 100%;background: white;">
+				<div id="div_head" class="mui-bar mui-bar-nav" style="background-color:#3188DE;  position:inherit; color: white;  height: 44px; text-align: center;">
+					<h1 id="index-title" class="mui-title" style="color: white;"></h1>
+				</div>
+				<div style="padding: 20px; width: 100px;float: left;">
+					<div style="border-radius: 50%;overflow: hidden; width: 100px; ;">
+						<img id="head-img" src="" style="width: 100px;height: 100px;  border: 0;">
+					</div>
+
+				</div>
+				<div style="float: left; margin-top: 40px; margin-left: 4px;">
+					<p id="sp_displayname">欢迎您，
+					</p>
+
+					<button onclick="fresh()" class="mui-btn mui-btn-success  mui-btn-outlined mui-icon mui-icon-loop" style="float:right; margin-left: 50px;">刷新数据</button>
+				</div>
+
+				<div class="mui-content-padded">
+					<button data-id="1" type="button" class="mm mui-btn mui-btn-primary mui-btn-block ">
+		        	<span  class="icon iconfont icon-fenpeizhenduanqingqiu" ></span>
+		        	待诊断<span class="mui-badge" ID="sp_dzd" style="background: red; color: white;">0</span>
+		        </button>
+					<button data-id="97" type="button" class="mm mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+		        	<span  class="icon iconfont icon-shenhe2"></span>
+		        	复&nbsp;&nbsp;&nbsp;&nbsp;核
+		        	<span class="mui-badge " ID="sp_fh" style="background: green; color: white;">0</span></button>
+					<button data-id="2" type="button" class="mm mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+		        		<span class="icon  iconfont icon-dedaozhenduanbaogao"></span>
+		        	已诊断
+		        	<span class="mui-badge " ID="sp_yzd" style="background: green; color: white;">0</span>
+		        </button>
+					<button data-id="3" type="button" class="mm mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+		        	<span  class="icon iconfont icon-tuihuiyanshou"></span>
+		        	
+		        	退&nbsp;&nbsp;&nbsp;&nbsp;回
+		        	<span class="mui-badge" ID="sp_th"  style="background: green; color: white;">0</span>
+		        </button>
+					<button data-id="98" type="button" class="mm mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+		        	<span  class="icon iconfont icon-huizhen"></span>
+		        	受&nbsp;&nbsp;&nbsp;&nbsp;邀
+		        	<span class="mui-badge" ID="sp_sy" style="background: green; color: white;">0</span>
+		        </button>
+					<button data-id="96" type="button" class="mm mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+		        		<span  class="icon iconfont icon-yuyuejiuzhen"></span>
+						预&nbsp;&nbsp;&nbsp;&nbsp;约
+						<span class="mui-badge" ID="sp_yy" style="background: green; color: white;">0</span>
+		        </button>
+					<button data-id="99" type="button" class="mm mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+		        		<span  class="icon iconfont icon-shoucangyishoucang"></span>
+						收&nbsp;&nbsp;&nbsp;&nbsp;藏
+						<span class="mui-badge" ID="sp_cc" style="background: green; color: white;">0</span>
+		        </button>
+					<button data-id="94" type="button" class="mm mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+		        	
+						<span  class="icon iconfont icon-ziyuantongji"></span>
+						统&nbsp;&nbsp;&nbsp;&nbsp;计
+					</a>
+		        </button>
+					<button data-id="95" type="button" class="mm mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+		        	
+						<span  class="icon iconfont icon-shezhi"></span>
+						设&nbsp;&nbsp;&nbsp;&nbsp;置
+					</a>
+		        </button>
+				</div>
+			</div>
+
+		</div>
+
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript">
+		// 修改index页显示主题
+		var centerName = localStorage.centerName;
+		var title = centerName ? centerName : 'KFBIO病理远程会诊平台';
+		document.getElementById("index-title").innerHTML = title;
+
+		//启用双击监听
+		mui.init({
+			gestureConfig: {
+				doubletap: true
+			},
+			subpages: [{
+				url: 'caselist_sub.html?type=1&ipad=1',
+				id: 'caselist',
+				styles: {
+					top: '0px',
+					bottom: '0px',
+					left: '255px',
+					width: jQuery(window).width() - 255
+				}
+
+			}]
+		});
+
+		jQuery(".mm").on('tap', function() {
+			//console.log("ipad index");
+
+			jQuery(".mm").each(function() {
+				var isclass = jQuery(this).hasClass("mui-btn-outlined");
+				if(isclass == false) {
+
+					jQuery(this).addClass("mui-btn-outlined");
+				}
+				var jumpurl = "";
+			});
+			jQuery(this).removeClass("mui-btn-outlined");
+			var id = this.getAttribute('data-id');
+			var ipad = "&ipad=1";
+			var xname = "";
+			if(id == "96") {
+				jumpurl = 'book_sub.html?type=' + id;
+				xname = "booklist";
+
+			} else if(id == "95") {
+				jumpurl = 'setting.html?type=' + id;
+				xname = "setting";
+
+			} else if(id == "94") {
+				jumpurl = 'statistics.html?type=' + id;
+				xname = "statistics";
+			} else {
+				jumpurl = 'caselist_sub.html?type=' + id;
+				xname = "caselist";
+			}
+
+			if(mui.os.plus) {
+				var array = plus.webview.all();
+				if(array) {
+					for(var i = 0, len = array.length; i < len; i++) {
+						var id = array[i].id; //console.log(array[i].id);
+						if(id != "HBuilder" && id != "index.html" && id != "caselist") {
+							plus.webview.getWebviewById(id).close();
+						}
+					}
+				}
+				console.log(jumpurl + ipad);
+				plus.webview.getWebviewById("caselist").loadURL(jumpurl + ipad);
+				//plus.webview.getWebviewById("caselistsub").reload();
+
+				// 修改页面跳转方式，
+				// 原：通过网页的跳转实现页面的切换
+				// 调整：通过添加webview跳转页面
+				/*mui.openWindow({
+					url: jumpurl + ipad,
+					id: xname
+				})*/
+
+			} else {
+				jQuery("#caselist").attr("src", jumpurl + ipad);
+			}
+
+		});
+
+		getNumber();
+
+		function fresh() {
+			getNumber();
+			//plus.webview.getWebviewById("caselist").evalJS("refresh()");
+			plus.webview.getWebviewById('caselist').reload();
+		}
+
+		mui.ready(function() {
+
+			LoadInfo();
+		});
+
+		function LoadInfo() {
+			var userInfo = localStorage.getItem("userInfo");
+			var user = userInfo ? window.eval("(" + userInfo + ")") : "";
+			jQuery("#head-img").attr("src", coreurl + user.photo);
+			jQuery("#sp_displayname").html("欢迎你," + user.name);
+			//jQuery("#sp_displayname").html("这是一个测试名，需要被省略");
+		}
+
+		function getNumber() {
+			console.log("左侧导航刷新");
+
+			var userInfo = localStorage.getItem("userInfo");
+			var user = userInfo ? window.eval("(" + userInfo + ")") : "";
+			jQuery.ajax(resturl + "GetCount", {
+				data: {
+					UserID: user.userid
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(ret) {
+					ret = eval(ret);
+					$("#sp_dzd").html(ret[0].num1);
+					$("#sp_yzd").html(ret[0].num2);
+					$("#sp_yy").html(ret[0].BookNum);
+					$("#sp_th").html(ret[0].ReturnNum);
+					$("#sp_sy").html(ret[0].InviteNumber);
+					$("#sp_cc").html(ret[0].CollectNum);
+					$("#sp_fh").html(ret[0].ReviewerNum);
+
+				},
+				error: function(xhr, type, errorThrown) {
+					//超时处理
+					if(type == 'timeout') {}
+				}
+			});
+		}
+	</script>
+
+</html>

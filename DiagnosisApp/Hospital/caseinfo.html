@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+
+		<link href="../css/mystyle.css" rel="stylesheet">
+		<link rel="stylesheet" href="hos-css/caseinfo.css" />
+
+	</head>
+
+	<body>
+
+			
+		<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable mui-slide-in" style="z-index: 99; ">
+			<!--菜单部分-->
+			<aside id="offCanvasSide" class="mui-off-canvas-right" style="max-width: 300px;">
+				<div id="offCanvasSideScroll" class="mui-scroll-wrapper" style="background: white; ">
+					<div class="mui-scroll">
+			
+						<button id="offCanvasHide" type="button" class="mui-btn mui-btn-danger mui-btn-block" style="padding: 5px 20px;">关闭菜单</button>
+						<div style="color: #0062CC;padding: 4px">
+							<i style="font-size: 18px; " class="fa fa-tag " style="margin-left: 5px;"></i>诊断备注：
+						</div>
+						<div style="padding: 4px;">
+							<textarea id="txt_remark" style="margin: 0px;"></textarea>
+						</div>			
+					</div>
+				</div>
+			</aside>
+						
+			<div class="mui-inner-wrap">
+				<div class="mui-off-canvas-backdrop"></div>
+				<header class="mui-bar mui-bar-nav" style="background-color:#3188DE; ">
+					<a style="color: white;" id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"> </a>
+					<h1 class="mui-title" style="color: white;" id="statustitle">病例详情</h1>
+					<!--<a id="offCanvasBtn" href="#offCanvasSide" style="font-size: 22px;" class="mui-icon mui-action-menu mui-icon-compose mui-pull-right">
+						<span style="font-size: 16px;" id="sp_righthead">查看原因</span>
+					</a>-->
+					<div id="topPopover" class="mui-popover">
+						<div class="mui-popover-arrow"></div>
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view" id="consultStatuslist">
+									<li class="mui-table-view-cell li_consult" data-id="">
+										<a href="#">全部状态</a>
+									</li>
+									<li class="mui-table-view-cell li_consult" data-id="1">
+										<a href="#">待诊断</a>
+									</li>
+									<li class="mui-table-view-cell li_consult" data-id="2">
+										<a href="#">已诊断</a>
+									</li>
+									<li class="mui-table-view-cell li_consult" data-id="3">
+										<a href="#">退回</a>
+
+									</li>
+									<li class="mui-table-view-cell li_consult" data-id="4">
+										<a href="#">收藏</a>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+				</header>
+				<div class="mui-content" style="background-color: white">
+					<div id="slider" class="mui-slider mui-fullscreen">
+						<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+							<a class="mui-control-item" href="#item1mobile">
+								病例
+							</a>
+							<a class="mui-control-item" href="#item2mobile">
+								切片<span class="mui-badge mui-badge-primary" style="position: absolute; margin-left: -6px;" id="sp_slidecount">0</span>
+							</a>
+							<a class="mui-control-item" href="#item3mobile">
+								附件<span class="mui-badge mui-badge-primary" style="position: absolute; margin-left: -6px;" id="sp_annexcount">0</span>
+							</a>
+							<a class="mui-control-item" href="#item4mobile">
+								留言
+							</a>
+
+						</div>
+					<div id="sliderProgressBar" class="mui-slider-progress-bar" style="width:25%;"></div>
+						<div class="mui-slider-group">
+							<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+								<div id="scroll1" class="mui-scroll-wrapper" style="height: auto;">
+									<div class="mui-scroll">
+										<div class="mui-loading" id="caseloading">
+											<div class="mui-spinner">
+											</div>
+										</div>
+										<div id="divcase" style="display: none">
+											<ul class="case_content_report">
+
+												<li style="margin: 0px 15px; padding: 2px 0px;">
+													<p><span>原病理号：</span><span id="sp_caseno"></span></p>
+													<p><span>患者信息：</span><span id="sp_info"></span></p>
+													<p><span>送检单位：</span><span id="sp_SendHos"></span></p>
+													<p><span>送检时间：</span><span id="sp_Received_Date"></span></p>
+													<p><span>取材部位：</span><span id="sp_MaterialParts"></span></p>
+													<p><span>临床诊断：</span><span id="sp_z_Digagnosis"></span></p>
+												</li>
+												<li style="margin: 0px 15px;border-top: 1px solid #e7e7e7; padding: 2px 0px;">
+													<h6>临床资料</h6>
+													<p><span id="sp_Clinical_Data"></span></p>
+												</li>
+
+												<li style="margin: 0px 15px;border-top: 1px solid #e7e7e7; padding: 2px 0px;">
+													<h6>大体所见</h6>
+													<p><span id="sp_Gennerally_See"></span></p>
+												</li>
+												<li style="margin: 0px 15px;border-top: 1px solid #e7e7e7; padding: 2px 0px;">
+													<h6>免疫组化</h6>
+													<p><span id="sp_Immune_Group"></span></p>
+												</li>
+
+												<li style="margin: 0px 15px;border-top: 1px solid #e7e7e7; padding: 2px 0px;">
+													<h6>原病理诊断</h6>
+													<p><span id="sp_Early_Digagnosis"></p>
+											</li>
+											<li style="margin: 0px 15px;border-top: 1px solid #e7e7e7; padding: 2px 0px;">
+												<h6>备注</h6>
+												<p><span id="sp_Remark"></p>
+												<br><br><br>	
+											</li>
+										</ul>
+										</div>
+								</div>
+							</div>
+							</div>
+							<div id="item2mobile" class="mui-slider-item mui-control-content">
+								<div id="scroll2" class="mui-scroll-wrapper">
+									<div class="mui-scroll">
+
+										<ul class="mui-table-view mui-col-xs-12" id="slidelist">
+											<div class="mui-loading">
+												<div class="mui-spinner">
+													
+												</div>
+											</div>
+
+										</ul>
+
+									</div>
+									<br><br><br>
+								</div>
+
+							</div>
+							<div id="item3mobile" class="mui-slider-item mui-control-content">
+								<div id="scroll3" class="mui-scroll-wrapper">
+									<div class="mui-scroll">
+										<ul class="mui-table-view mui-col-xs-12" id="annexlist">
+											<div class="mui-loading">
+												<div class="mui-spinner">
+													
+												</div>
+											</div>
+
+										</ul>
+										<br><br><br>
+									</div>
+								</div>
+
+							</div>
+							<div id="item4mobile" class="mui-slider-item mui-control-content">
+								<div id="scroll4" class="mui-scroll-wrapper">
+									<div class="mui-scroll" id="xsroll">
+										<div class="mui-content2">
+											<!--<pre id='h'></pre>-->
+											<div id="msg-list" style=" overflow-y: auto;-webkit-overflow-scrolling : touch;  ">
+												<div class="mui-loading">
+													<div class="mui-spinner">
+														
+													</div>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+
+								</div>
+
+							</div>
+						
+						
+						
+						
+						</div>
+					</div>
+
+				</div>
+				
+		<footer  id="footerid" style="display: none; ">
+				<div class="footer-left" style="display: none;">
+					<i id='msg-image' class="mui-icon " style="font-size: 28px;"></i>
+				</div>
+				<div class="footer-center" style="margin-left:-40px ;">
+					<textarea id='msg-text' type="text" class='input-text'></textarea>
+					<button id='msg-sound' type="button" class='input-sound' style="display: none;">按住说话</button>
+				</div>
+				<label for="" class="footer-right">
+				<i id='msg-type' class="mui-icon mui-icon-paperplane"></i>
+			</label>
+			
+		</footer>
+							
+	 </div>
+</div>
+		<div>
+
+			<div class="mui-backdrop mui-active" style="display: none;" id="div_over">
+				<div class="mui-loading" style="position: absolute; top:50%; left: 50%;">
+					<div class="mui-spinner">
+
+					</div>
+					<div style="font-weight: bold;">报告生成中...</div>
+				</div>
+			</div>
+		</div>
+		<div id="topPopover2" class="mui-popover" style="position: fixed;">
+			<div class="mui-popover-arrow"></div>
+
+			<div style="padding: 4px;"><textarea id="p_return" style="margin: 0px;height: 150px;" readonly="readonly"></textarea></div>
+		</div>
+		</div>
+	
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="hos-js/common.js"></script>
+		<script src="../js/mui.lazyload.js"></script>
+		<script src="../js/mui.lazyload.img.js"></script>
+		<script type="text/javascript" src="hos-js/caseinfo.js" ></script>
+	
+	</body>
+
+</html>

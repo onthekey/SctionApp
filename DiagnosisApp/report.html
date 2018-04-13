@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<style>
+			#popover {
+				min-width: 282px;
+				height: 300px;
+				top: 50% !important;
+				margin-top: -150px;
+				left: 50% !important;
+				margin-left: -141px;
+			}
+			
+			@media (min-width: 400px) {
+				#popover {
+					width: 80%;
+					margin-left: -40%;
+				}
+			}
+			
+			.mui-popover .mui-popover-arrow {
+				display: none !important;
+			}
+			
+			.operate {
+				text-align: center;
+				margin-top: 20px
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color:#3188DE; ">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+			<h1 id="title" class="mui-title" style="color: white;">报告预览</h1>
+		</header>
+		<nav id="ToolerBar" class="mui-bar mui-bar-tab" align="center">
+			<button type="button" class="mui-btn mui-btn-success mui-btn-outlined" id="btnIssue">
+					签发报告
+				</button> &nbsp;
+			<button type="button" class="mui-btn mui-btn-warning mui-btn-outlined" id="btnreview">
+					复核报告
+			</button>
+			<button type="button" class="mui-btn mui-btn-warning mui-btn-outlined" id="btncancelreview">
+					撤回复核
+			</button>
+			<button type="button" class="mui-btn mui-btn-warning mui-btn-outlined" id="btncancelreport">
+					撤回诊断
+			</button>
+			<button type="button" class="mui-btn mui-btn-warning mui-btn-outlined" id="btnreviewreport">
+					复核签发
+			</button>
+		</nav>
+
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript">
+		//		var viewerurl = "http://192.168.0.67:9999";
+		var viewerurl = coreurl;
+		//var url = viewerurl + "/PdfViewer/viewer.html?kk=BrowerHandler.ashx";
+		var jumpurl = viewerurl + "/Expert/Report.aspx?ConsultID=" + getQueryString2("ConsultID")
+		mui.init({
+
+			subpages: [{
+				url: jumpurl,
+				id: 'reportpdf.html',
+				styles: {
+					top: '40px',
+					bottom: '45px',
+
+				}
+			}],
+			beforeback: function() {
+
+			}
+		});
+		mui.ready(function() {
+
+			LoadControl();
+		});
+
+		function LoadControl() {
+			var ConsultStatusID = getQueryString2("ConsultStatusID");
+			var IsRecheck = getQueryString2("IsRecheck");
+			var type = getQueryString2("type");
+			jQuery("#btnreviewreport").css("display", "none");
+
+			console.log(ConsultStatusID);
+			console.log(IsRecheck);
+			console.log(type);
+
+			if(ConsultStatusID == "1") //待诊断
+			{
+
+				jQuery("#btnIssue").css("display", "");
+				jQuery("#btnreview").css("display", "");
+				jQuery("#btncancelreview").css("display", "none");
+				jQuery("#btncancelreport").css("display", "none");
+				if(type == "99") {
+					jQuery("#btnIssue").css("display", "none");
+					jQuery("#btnreview").css("display", "none");
+					jQuery("#btncancelreview").css("display", "none");
+					jQuery("#btncancelreport").css("display", "none");
+
+				}
+
+			} else if(ConsultStatusID == "2") //复核中
+			{
+				if(IsRecheck != -1) {
+					jQuery("#btnIssue").css("display", "none");
+					jQuery("#btnreview").css("display", "none");
+					jQuery("#btncancelreview").css("display", "");
+					jQuery("#btncancelreport").css("display", "none");
+				} else {
+
+					jQuery("#btnIssue").css("display", "");
+					jQuery("#btnreview").css("display", "");
+					jQuery("#btncancelreview").css("display", "none");
+					jQuery("#btncancelreport").css("display", "none");
+				}
+				if(type == "97") {
+
+					jQuery("#btnIssue").css("display", "none");
+					jQuery("#btnreview").css("display", "none");
+					jQuery("#btncancelreview").css("display", "none");
+					jQuery("#btncancelreport").css("display", "none");
+					jQuery("#btnreviewreport").css("display", "");
+				}
+
+			} else if(ConsultStatusID == "4") //已诊断
+			{
+				jQuery("#btnIssue").css("display", "none");
+				jQuery("#btnreview").css("display", "none");
+				jQuery("#btncancelreview").css("display", "none");
+				if(type == "99") {
+					jQuery("#btncancelreport").css("display", "none");
+				} else {
+					jQuery("#btncancelreport").css("display", "");
+				}
+
+				//如果已经复核完成，不能进行任何操作
+				if(IsRecheck == '1') {
+					jQuery("#btncancelreport").css("display", "none");
+				}
+			}
+			
+			// 如果repoert type = 99 (收藏), 销毁所有操作
+			if (type == "99") {
+				jQuery("#ToolerBar").css("display", "none");
+				/*jQuery("#btnIssue").css("display", "none");
+				jQuery("#btnreview").css("display", "none");
+				jQuery("#btncancelreview").css("display", "none");
+				jQuery("#btncancelreport").css("display", "none");
+				jQuery("#btnreviewreport").css("display", "none");*/
+			}
+
+		}
+		document.getElementById('btnreview').addEventListener('tap', function() {
+			var Diagnosis = decodeURI(escape(getQueryString2("TextDiagnosis")));
+			var Diagnosis_Remark = decodeURI(escape(getQueryString2("Diagnosis_Remark")));
+			var z_Mirror = decodeURI(escape(getQueryString2("z_Mirror")));
+
+			var param = "&TextDiagnosis=" + encodeURI(Diagnosis) +
+				"&Diagnosis_Remark=" + encodeURI(Diagnosis_Remark) +
+				"&z_Mirror=" + encodeURI(z_Mirror) +
+				"&ipad=" + getQueryString2('ipad') +
+				"&type=" + getQueryString2("type");
+			var ipad = getQueryString2('ipad');
+			var jumpurl = 'review.html?ConsultID=' + getQueryString2("ConsultID") + param;
+			if(ipad == "1") {
+				if(mui.os.plus) {
+					jump2(jumpurl, 'review', {
+
+					});
+				} else {
+					window.location.href = jumpurl;
+				}
+
+			} else {
+
+				jump(jumpurl, 'review', {
+
+				});
+			}
+
+		});
+		
+		document.getElementById('btncancelreview').addEventListener('tap', function() {
+
+			var btnArray = ['否', '是'];
+			mui.confirm('确定撤回复核吗？', '提示', btnArray, function(e) {
+				if(e.index == 1) {
+					jQuery.ajax(resturl + 'CancelReviewReport', {
+						data: JSON.stringify({
+							ConsultID: getQueryString2("ConsultID"),
+						}),
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						cache: false,
+						success: function(data) {
+							console.log("撤回复核中");
+							data = eval(data);
+							if(data == "1") {
+								if(navigator.userAgent.indexOf("Html5Plus") < 0) { //不支持5+ API
+									jump("caselist_main.html?type=" + getQueryString2("type"), 'caselist', {
+
+									});
+								} else { //支持5+ API
+									plus.webview.getWebviewById("index.html").evalJS("getNumber()");
+									plus.webview.close("caseinfo.html");
+									if(!mui.os.android) {
+										//plus.webview.getWebviewById("caselist").reload();
+										plus.webview.getWebviewById("caselist").evalJS("refresh()");
+									} else {
+										if (mui.os.ipad) {
+											plus.webview.getWebviewById("caselist").evalJS("refreshData()");
+											
+											plus.webview.getWebviewById("caselist").evalJS("refresh()");
+				        				    plus.webview.getWebviewById("index.html").evalJS("getNumber()");
+										} else {
+											plus.webview.getWebviewById("caselist").evalJS("refresh()");
+										}
+									}
+									plus.nativeUI.closeWaiting();
+									mui.back();
+								}
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							if(type == 'timeout') {
+								mui.toast("网络不给力，请重新操作！");
+
+							}
+						}
+					});
+
+				}
+			});
+
+		});
+
+		document.getElementById('btnIssue').addEventListener('tap', function() {
+
+			var btnArray = ['否', '是'];
+			mui.confirm('确定签发该报告吗？', '提示', btnArray, function(e) {
+				if(e.index == 1) {
+					plus.nativeUI.showWaiting("报告签发中...");
+					//var Diagnosis = decodeURI(escape(getQueryString2("TextDiagnosis")));
+					//var Diagnosis_Remark = decodeURI(escape(getQueryString2("Diagnosis_Remark")));
+					
+					// 报告字符串添加
+					var Diagnosis = window.localStorage.TextDiagnosis;
+					var Diagnosis_Remark = window.localStorage.Diagnosis_Remark;
+	
+					
+					//console.log("签发中");
+					//console.log("Diagnosis:" + encodeURI(Diagnosis));
+					
+					jQuery.ajax(resturl + 'DiagnosisReport', {
+						data: JSON.stringify({
+							ConsultID: getQueryString2("ConsultID"),
+							TextDiagnosis: encodeURI(Diagnosis),
+							Diagnosis_Remark: encodeURI(Diagnosis_Remark)
+
+						}),
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						cache: false,
+						success: function(data) {
+							console.log("签发中");
+							data = eval(data);
+							if(data == "1") {
+								if(navigator.userAgent.indexOf("Html5Plus") < 0) { //不支持5+ API
+									jump("caselist_main.html?type=" + getQueryString2("type"), 'caselist', {
+
+									});
+								} else { //支持5+ API
+									plus.webview.getWebviewById("index.html").evalJS("getNumber()");
+									plus.webview.close("caseinfo.html");
+									if(!mui.os.android) {
+										//plus.webview.getWebviewById("caselist").reload();
+										plus.webview.getWebviewById("caselist").evalJS("refresh()");
+									} else {
+										if (mui.os.ipad) {
+											plus.webview.getWebviewById("caselist").evalJS("refreshData()");
+											
+											plus.webview.getWebviewById("caselist").evalJS("refresh()");
+				        				    plus.webview.getWebviewById("index.html").evalJS("getNumber()");
+										} else {
+											plus.webview.getWebviewById("caselist").evalJS("refresh()");
+										}
+									}
+									plus.nativeUI.closeWaiting();
+									mui.back();
+								}
+							} else {
+								plus.nativeUI.closeWaiting();
+								mui.toast("提交异常!");
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							if(type == 'timeout') {
+								plus.nativeUI.closeWaiting();
+								mui.toast("网络不给力，请重新操作！");
+
+							}
+						}
+					});
+
+				}
+			});
+
+		});
+		document.getElementById('btncancelreport').addEventListener('tap', function() {
+
+			var btnArray = ['否', '是'];
+			mui.confirm('确定撤销该报告吗？', '提示', btnArray, function(e) {
+				if(e.index == 1) {
+
+					jQuery.ajax(resturl + 'CancelDiagnosis', {
+						data: JSON.stringify({
+							ConsultID: getQueryString2("ConsultID")
+						}),
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						cache: false,
+						success: function(data) {
+							console.log("撤销报告中");
+							data = eval(data);
+							if(data == "1") {
+								if(navigator.userAgent.indexOf("Html5Plus") < 0) { //不支持5+ API
+									var ipad = getQueryString2("ipad");
+									if(ipad == 1) {
+										jump("caselist_sub.html?type=" + getQueryString2("type"), 'caselist', {
+
+										});
+									} else {
+										jump("caselist_main.html?type=" + getQueryString2("type"), 'caselist', {
+
+										});
+									}
+
+								} else { //支持5+ API
+									plus.webview.getWebviewById("index.html").evalJS("getNumber()");
+									plus.webview.close("caseinfo.html")
+									if(!mui.os.android) {
+										//plus.webview.getWebviewById("caselist").reload();
+										plus.webview.getWebviewById("caselist").evalJS("refresh()");
+									} else {
+										if (mui.os.ipad) {
+											plus.webview.getWebviewById("caselist").evalJS("refreshData()");
+											
+											plus.webview.getWebviewById("caselist").evalJS("refresh()");
+				        				    plus.webview.getWebviewById("index.html").evalJS("getNumber()");
+										} else {
+											plus.webview.getWebviewById("caselist").evalJS("refresh()");
+										}
+									}
+									mui.back();
+
+								}
+							} else if(data == "2") {
+
+								mui.toast("已发布无法撤回，请联系管理员！");
+							} else if(data == "0") {
+
+								mui.toast("提交异常!");
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							if(type == 'timeout') {
+								mui.toast("网络不给力，请重新操作！");
+
+							}
+						}
+					});
+
+				}
+			});
+
+		});
+		document.getElementById('btnreviewreport').addEventListener('tap', function() {
+			/*
+			console.log("第二次解析:");
+			console.log("--------------------------------");
+			console.log(decodeURI(escape(getQueryString2("TextDiagnosis"))));
+		    console.log("--------------------------------");
+		    var Diagnosis = decodeURI(escape(getQueryString2("TextDiagnosis")));
+			console.log(Diagnosis);
+			console.log("--------------------------------");*/
+
+			var btnArray = ['否', '是'];
+			mui.confirm('确定签发该报告吗？', '提示', btnArray, function(e) {
+				if(e.index == 1) {
+					// 添加复核诊断写回操作
+					//var Diagnosis = decodeURI(escape(getQueryString2("TextDiagnosis")));
+					//var Diagnosis = getQueryString2("TextDiagnosis");
+					
+					// 报告字符串添加
+					var Diagnosis = window.localStorage.TextDiagnosis;
+					
+					jQuery.ajax(resturl + 'MastReviewReport', {
+						data: JSON.stringify({
+							ConsultID: getQueryString2("ConsultID"),
+							TextDiagnosis: Diagnosis
+						}),
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						cache: false,
+						success: function(data) {
+							data = eval(data);
+							if(data == "1") {
+								if(navigator.userAgent.indexOf("Html5Plus") < 0) { //不支持5+ API
+									jump("caselist_main.html?type=" + getQueryString2("type"), 'caselist', {
+
+									});
+								} else { //支持5+ API
+									plus.webview.getWebviewById("index.html").evalJS("getNumber()");
+									plus.webview.close("caseinfo.html")
+									if(!mui.os.android) {
+										//plus.webview.getWebviewById("caselist").reload();
+										plus.webview.getWebviewById("caselist").evalJS("refresh()");
+									} else {
+										if (mui.os.ipad) {
+											plus.webview.getWebviewById("caselist").evalJS("refreshData()");
+											
+											plus.webview.getWebviewById("caselist").evalJS("refresh()");
+				        				    plus.webview.getWebviewById("index.html").evalJS("getNumber()");
+										} else {
+											plus.webview.getWebviewById("caselist").evalJS("refresh()");
+										}
+									}
+									mui.back();
+
+								}
+							} else {
+
+								mui.toast("提交异常!");
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							if(type == 'timeout') {
+								mui.toast("网络不给力，请重新操作！");
+
+							}
+						}
+					});
+
+				}
+			});
+
+		});
+	</script>
+
+</html>

@@ -1,0 +1,579 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<title>用户登录</title>
+		<!-- Custom Theme files -->
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/login.css" rel="stylesheet" type="text/css" media="all" />
+		<!-- for-mobile-apps -->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="Classy Login form Responsive, Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+		<!-- //for-mobile-apps -->
+		<style>
+			#serverPop {
+				min-width: 282px;
+				max-width: 282px;
+				top: 50% !important;
+				margin-top: -150px;
+				left: 50% !important;
+				margin-left: -141px;
+			}
+			
+			#serverPop .mui-popover-arrow {
+				display: none !important;
+			}
+			
+			#serverPop .operate {
+				text-align: center;
+				margin-top: 20px
+			}
+			
+			#serverList {
+				text-align: center;
+				margin: 16px;
+			}
+			
+			.btn_content {
+				text-align: right;
+			}
+			
+			.scroll_contrainer {
+				position: relative;
+				height: 200px;
+			}
+			
+			.scroll-wrapper {
+				top: 0px;
+				height: 200px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--header start here-->
+		<div class="header">
+			<div class="header-main">
+				<div class="container">
+					<div class="row">
+						<h1>掌上会诊平台</h1>
+						<div class="col-md-3 col-centered tac" style="text-align:center; "> <img src="images/logo.png" alt="logo"> </div>
+						<div class="header-bottom">
+							<div class="header-right w3agile">
+								<div class="header-left-bottom agileinfo">
+									<input id="account" type="text" style="width: 100%;margin-top: 20px;" placeholder="请输入账号" name="name" />
+									<input id='password' type="password" style="width: 100%;" name="password" placeholder="请输入密码" />
+									<input id='login' type='submit' style="width: 100%; margin-top: 15px;" value='点击登录'>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="serverPop" class="mui-popover" style="display: none;">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-content-padded">
+				<div class="mui-popover-arrow"></div>
+				<h4 id="title" style="text-align: center;margin-top: 10px;">选择服务器</h4>
+				<hr />
+				<div class="scroll_contrainer">
+					<div class="mui-scroll-wrapper scroll-wrapper">
+						<div class="mui-scroll">
+							<!--<div id="serverList"></div>-->
+							<ul id="serverList">
+
+							</ul>
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div class="btn_content">
+					<!--<button id="cancelLogin" class="mui-btn mui-btn-primary" onclick="cancelLogin()">取消</button>-->
+					<button id="cancelLogin" class="mui-btn mui-btn-primary">取消</button>
+				</div>
+			</div>
+		</div>
+		<!--header end here-->
+		<div class="copyright">
+			<p>
+				Powered by KFBIO Copyright ©2.0.2
+			</p>
+		</div>
+		<!--footer end here-->
+
+		<script src="js/mui.min.js"></script>
+		<script src="js/mui.picker.min.js"></script>
+		<!--<script src="js/jquery.min.js"></script>-->
+		<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.json.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/md5.js"></script>
+		<script src="js/mui.enterfocus.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/common.js"></script>
+		<script>
+			// 版本号
+			var ver = null;
+			var wgtVer = null;
+			// 检测版本更新地址, 获取版本地址
+			// 测试检测版本地址,本机地址
+			// var checkURL = "http://192.168.0.37:8080/static/testFolder/updateCheck/check.html";
+			var checkURL = "http://moblie.kfbio.cn/asmx/SSOService.asmx/Ver"
+			// 下载更新地址,由服务器端发送生成(需要被替换)
+			// 测试用wgt URL, 本机地址
+			// var wgtURL = "http://192.168.0.37:8080/static/testFolder/downLoad/H5BE947F4_1_1_1.wgt";
+			var wgtURL = null;
+
+			// 请求登录服务器地址
+			var loginURLRequest = 'http://moblie.kfbio.cn/asmx/SSOService.asmx/GetCenter';
+
+			// 日志记录
+			var logURLRequest = 'http://moblie.kfbio.cn/asmx/SSOService.asmx/AddLog';
+
+			// H5 Plus事件处理
+			function plusReady() {
+				//设置屏幕亮度
+				//plus.screen.setBrightness(1);
+				// 开启一直保持程序唤醒状态
+				//plus.device.setWakelock(true);
+				// ipad设置屏幕始终为横屏
+				if(mui.os.ipad) {
+					plus.screen.lockOrientation("landscape");
+				} else {
+					plus.screen.lockOrientation("portrait");
+				}
+
+				// 获取本地应用资源版本号
+				plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+					ver = inf.version;
+					wgtVer = inf.version;
+					console.log("当前应用版本:" + wgtVer);
+					// 检查是否有可用更新
+					checkUpdate();
+					//autoLogin();
+				});
+			}
+			if(window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener("plusready", plusReady, false);
+			}
+			mui.init();
+			mui.ready(function() {
+				//导致点击出现软键盘
+				//document.getElementById("account").focus();
+				var first = null;
+				mui.back = function() {
+					//首次按键，提示‘再按一次退出应用’
+					if(!first) {
+						first = new Date().getTime();
+						mui.toast('再按一次退出应用');
+						setTimeout(function() {
+							first = null;
+						}, 2000);
+					} else {
+						if(new Date().getTime() - first < 2000) {
+							plus.runtime.quit();
+						}
+					}
+				};
+			})
+
+			var _password = "";
+			var _name = "";
+			//登录事件
+			document.getElementById("login").addEventListener("tap", function() {
+				//document.getElementById("login").value = "登录中...";
+				_name = jQuery("#account").val();
+				_password = jQuery("#password").val();
+
+				console.log("查询服务器中...");
+
+				if(!_name) {
+					mui.toast("请输入账号!");
+					document.getElementById("login").value = "点击登录";
+				} else if(!_password) {
+					mui.toast("请输入密码!");
+					document.getElementById("login").value = "点击登录";
+				} else {
+					// 根据用户名获取需要登录的服务器
+					// jQuery.ajax("http://192.168.0.37:8080/static/testFolder/server/server.json", { // 测试用请求URL
+					/*localStorage.centerName = '兰卫中心';
+					// var serverRequest = 'http://192.168.0.132:8088'; // 测试用数据
+					var serverRequest = 'http://139.196.80.119';
+					login(serverRequest);*/
+						
+					jQuery.ajax(loginURLRequest, {
+						data: {
+							"UserName": _name
+						},
+						dataType: 'json',
+						type: 'POST',
+						timeout: 1000,
+						success: function(ret) {
+							// 保存一个访问日志
+							userLog(_name);
+
+							// 判断是否存在多个登录服务器, 用户选择
+							if(ret.server.length > 1) {
+								console.log("选择服务器");
+								mui('#serverPop').popover("toggle");
+
+								var serverList = "";
+								for(i = 0; i < ret.server.length; i++) {
+									//serverList += '<div><button onClick="selectServer(\'' + ret.server[i].serverIP + '\');" value="' + ret.server[i].serverIP + '">' + ret.server[i].CenterName + '</a></div>';
+									serverList += '<li class="mui-table-view-cell">' +
+										'<a href="javascript:;"' +
+										'onClick="selectServer(\'' + ret.server[i].ServerIP + '\',\'' + ret.server[i].CenterName + '\')">' // 点击事件
+										+
+										ret.server[i].CenterName + '</a></li>' // 获取服务器IP
+								}
+								document.getElementById('serverList').innerHTML = serverList;
+								mui('.mui-scroll-wrapper').scroll({
+									scrollY: true,
+									indicators: true,
+									deceleration: 0.0005
+								});
+								// 创建弹出窗口
+							} else if(ret.server.length == 1) {
+								console.log("直接登录");
+								// 只存在一个登录服务器时直接登录
+								// 测试用服务器请求,统一到主机
+								// var serverRequest = ret.server[0].serverHost;
+								localStorage.centerName = ret.server[0].CenterName;
+								var serverRequest = ret.server[0].ServerIP;
+								login(serverRequest);
+							} else {
+								console.log("用户不存在")
+								document.getElementById("login").value = "点击登录";
+								mui.toast("账号或者密码错误!");
+							}
+
+						},
+						error: function(xhr, type, errorThrown) {
+							console.log(type);
+							// 超时操作
+							if(type == 'timeout') {
+								document.getElementById("login").value = "点击登录";
+								mui.toast("登录超时!");
+							} else {
+								//mui.toast("查询登录站点失败!");
+								mui.toast("登录失败!");
+							}
+						}
+					});
+				}
+			});
+
+			// 将登录请求以日志形式保存
+			function userLog(username) {
+				jQuery.ajax(logURLRequest, {
+					data: {
+						"UserName": _name
+					},
+					dataType: 'json',
+					type: 'POST',
+					timeout: 1000,
+					success: function(ret) {
+						console.log("日志保存完成");
+					}
+				});
+			}
+
+			function selectServer(loginServer, centerName) {
+				console.log("登录到服务器:" + loginServer + "中...");
+				localStorage.centerName = centerName;
+				login(loginServer);
+				jQuery("#serverPop").css("display", "");
+				mui('#serverPop').popover("toggle");
+			}
+
+			function login(loginServer) {
+				document.getElementById("login").value = "登录中...";
+				//console.log(loginURLRequest);
+				console.log(loginServer + "/moblie/api/" + "Login");
+				console.log('Login: 登录入口, 用户信息:username: ' + _name + ';password: ' + _password);
+
+				/*jQuery.ajax(loginServer + "Login", {*/
+				jQuery.ajax(loginServer + "/moblie/api/" + "Login", { // 测试用Ajax请求,无论任何筛选条件,只要登录User为zj001,同意登录到resturl
+					data: {
+						username: _name,
+						password: hex_md5(_password)
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(ret) {
+						console.log("登录到 指定服务器中");
+
+						ret = eval(ret);
+
+						if(ret == 0) {
+							mui.toast("账号或者密码错误!");
+							document.getElementById("login").value = "点击登录";
+						} else {
+							var user = new Object();
+							user.userid = ret[0].UserID;
+							user.name = ret[0].DisplayName;
+							user.phone = ret[0].Phone;
+							user.account = _name;
+							user.photo = ret[0].Photo;
+							user.Qm = ret[0].Qm;
+							user.ver = ver;
+							user.centerGroup = ret[0].CenterGroup;
+							user.role = ret[0].RoleID;
+							user.centerName = localStorage.centerName;
+
+							//转换成json字符串
+							var userinfo = jQuery.toJSON(user);
+
+							localStorage.userInfo = userinfo;
+							// 保存登录的服务器地址
+							localStorage.server = loginServer;
+							localStorage.password = _password;
+
+							if(mui.os.ipad) {
+								if(ret[0].RoleID == 1) { // 分配端
+									jumpurl = "Distribution/index_ipad.html";
+								} else if(ret[0].RoleID == 2) { // 专家端
+									jumpurl = "ipad_index.html";
+								} else if(ret[0].RoleID == 0) {
+									jumpurl = "Hospital/ipad_index.html"; // 医院端(申请端)
+								}
+							} else {
+								//var jumpurl = "index.html";						
+								// 通过判定用户的权限来登录到响应的系统
+								if(ret[0].RoleID == 1) { // 分配端
+									jumpurl = "Distribution/index.html";
+								} else if(ret[0].RoleID == 2) { // 专家端
+									jumpurl = "index.html";
+								} else if(ret[0].RoleID == 0) {
+									jumpurl = "Hospital/index.html"; // 医院端(申请端)
+								}
+							}
+
+							/*if(mui.os.ipad)
+								jumpurl = "ipad_index.html";*/
+
+							mui.openWindow({
+								url: jumpurl,
+								id: 'index.html',
+								show: {
+									autoShow: true,
+									aniShow: "slide-in-right",
+									duration: 200
+								},
+								waiting: {
+									autoShow: false
+								}
+							});
+							document.getElementById("login").value = "点击登录";
+						}
+
+					},
+					error: function(xhr, type, errorThrown) {
+						console.log('查询错误');
+						//超时处理
+						if(type == 'timeout') {
+							document.getElementById("login").value = "点击登录";
+							mui.toast("登录超时");
+						}
+					}
+				});
+			}
+
+			// 自动登录模块,检测用户是否已经登录该应用且未点击退出
+			function autoLogin() {
+				console.log("自动登录入口");
+				if(localStorage.getItem("userInfo") != null) {
+					console.log("自动登录中");
+
+					// 修改内容, 在自动登录时同时请求服务器中是否存在数据
+					var userInfo = localStorage.getItem("userInfo");
+					var user = userInfo ? window.eval("(" + userInfo + ")") : "";
+					console.log(user.account + "登录到" + loginURLRequest);
+
+					// 根据用户名获取需要登录的服务器
+					// jQuery.ajax("http://192.168.0.37:8080/static/testFolder/server/server.json", { // 测试用请求URL
+					
+					
+					if (true) {
+						_name = user.account;
+						_password = localStorage.password
+						login(localStorage.server);
+					} else {
+						jQuery.ajax(loginURLRequest, {
+						data: {
+							"UserName": user.account
+						},
+						dataType: 'json',
+						type: 'POST',
+						timeout: 1000,
+						success: function(ret) {
+							// 保存一个访问日志
+							userLog(user.account);
+
+							_name = user.account;
+							_password = localStorage.password
+							console.log("自动登录信息" + _name + ":" + _password);
+							login(localStorage.server);
+
+							// 判断是否存在多个登录服务器, 用户选择
+
+						},
+						error: function(xhr, type, errorThrown) {
+							// 超时操作
+							if(type == 'timeout') {
+								mui.toast("自动登录超时");
+								document.getElementById("login").value = "点击登录";
+							} else {
+								mui.toast("自动登录失败");
+							}
+						}
+					});
+					}
+					
+
+					/*var jumpurl = "index.html";
+
+					if(mui.os.ipad)
+						jumpurl = "ipad_index.html";
+					mui.openWindow({
+						url: jumpurl,
+						id: 'index.html',
+						show: {
+							autoShow: true,
+							aniShow: "slide-in-right",
+							duration: 200
+						},
+						waiting: {
+							autoShow: false
+						}
+					});*/
+				}
+			}
+
+			function cancelLogin() {
+				mui('#serverPop').popover("toggle");
+			}
+
+			// 检测更新
+			function checkUpdate() {
+				// UI显示, 与用户有一个交互
+				// plus.nativeUI.showWaiting("检测更新...");
+				var xhr = new XMLHttpRequest();
+				// 跨域请求头文件
+				//xhr.setRequestHeader("Access-Control-Allow-Origin", "http://moblie.kfbio.cn");
+				// 异步查询监听
+				xhr.onreadystatechange = function() {
+					switch(xhr.readyState) {
+						case 4:
+							plus.nativeUI.closeWaiting();
+							if(xhr.status == 200) {
+								console.log("检测更新成功:" + xhr.responseText);
+								var newVer = xhr.responseText;
+
+								newVer = replaceAll(newVer, ".", "");
+								newVer = Number(newVer);
+								console.log(newVer);
+
+								wgtVer = replaceAll(wgtVer, ".", "");
+								wgtVer = Number(wgtVer);
+								console.log(wgtVer);
+								/*if (wgtVer && newVer && (wgtVer != newVer)) {
+									downWgt();
+								} else {
+									plus.nativeUI.alert("已经升级为最新版本");
+								}*/
+								// 提示更新
+								// var data = window.eval('(' + xhr.responseText + ')');
+								if(wgtVer && newVer && (wgtVer < newVer)) {
+									// 询问更新,条件暂未true,询问更新
+									if(true) {
+										var btnArray = ['立即更新', '下次再说'];
+										mui.confirm('平台有新版本可以更新 ', '更新检测', btnArray, function(e) {
+											if(e.index == 0) {
+												// 窗口反馈,提示用户等待
+												plus.nativeUI.showWaiting("正在更新中...");
+												console.log("更新版本中:" + newVer);
+												wgtURL = "http://moblie.kfbio.cn/wgt/" + newVer + '.wgt';
+												downWgt();
+											} else {
+												console.log("取消更新");
+												autoLogin();
+											}
+										});
+									} else {
+										downWgt(); // 执行更新操作
+									}
+								} else {
+									console.log("已经升级为最新版本");
+									// plus.nativeUI.alert("已经升级为最新版本");
+									// 完成更新后自动登录
+									autoLogin();
+								}
+							} else {
+								console.log("检测更新失败:状态" + xhr.status);
+								//plus.nativeUI.alert("检测更新失败");
+								autoLogin();
+							}
+							break;
+						default:
+							break;
+					}
+				}
+				xhr.open('POST', checkURL);
+				xhr.send();
+			}
+
+			function replaceAll(str, sptr, sptr1) {
+				while(str.indexOf(sptr) >= 0) {
+					str = str.replace(sptr, sptr1);
+				}
+				return str;
+			}
+
+			// 下载New Version
+			function downWgt() {
+				plus.nativeUI.showWaiting("下载wgt文件中...");
+				console.log("下载地址:" + wgtURL);
+				plus.downloader.createDownload(wgtURL, {}, function(d, status) {
+					// listener, 监听是否下载完成or下载失败
+					if(status == 200) {
+						console.log("下载wgt成功:" + d.filename);
+						installWgt(d.filename); // 安装wgt包
+					} else {
+						console.log("下载wgt成功");
+						plus.nativeUI.alert("下载更新失败");
+					}
+					plus.nativeUI.closeWaiting();
+				}).start();
+			}
+
+			// 更新版本与下载内容
+			function installWgt(path) {
+				plus.nativeUI.showWaiting("安装wgt文件...");
+				plus.runtime.install(path, {}, function() {
+					// 更新成功操作
+					plus.nativeUI.closeWaiting();
+					console.log("升级成功");
+					plus.nativeUI.alert("应用资源更新完成", function() {
+						plus.runtime.restart();
+					});
+				}, function(e) {
+					// 更新失败操作
+					plus.nativeUI.closeWaiting();
+					console.log("安装wgt文件失败[" + e.code + "]:" + e.message);
+					plus.nativeUI.alert("安装更新失败[" + e.code + "]:" + e.message);
+				});
+			}
+
+			document.getElementById("cancelLogin").addEventListener("tap", function() {
+				cancelLogin();
+			});
+		</script>
+	</body>
+
+</html>

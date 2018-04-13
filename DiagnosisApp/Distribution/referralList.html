@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>预约</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+ 		<link rel="stylesheet" href="base/css/newfont.css" />
+ 		
+ 		<link rel="stylesheet" href="style/TriageList.css" />
+	</head>
+
+	<body>
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div>
+					<table style="width:100%;background: white; height: 40px;" id="tb_hz">
+						<tr>
+							<td style="width: 50%;">
+								<a id="applySites" href="#" class="mui-btn  mui-btn-link mui-btn-block mui-btn-outlined mui-icon mui-icon-arrowdown mui-right" style="padding: 0px; margin: 0px;  border：0px;height: 30px;line-height: 30px;">申请单位</a>
+							</td>
+							<td style="width: 50%;">
+								<a id="statusList" href="#" class="mui-btn mui-btn-link  mui-btn-block mui-btn-outlined mui-icon mui-icon-arrowdown mui-right" style="padding: 0px; margin: 0px; height:  30px; line-height: 30px; padding-right: 4px;">状态</a>
+							</td>
+						</tr>
+					</table>
+					<div>
+						<ul id="container" class="mui-table-view">
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 相当与Toolbar位置 -->
+		<div id="div_head" class="mui-bar mui-bar-nav" style="background-color:#3188DE; display: none;  ">
+			<h1 id="headertitle" class="mui-title" style="color: white;">预约列表</h1>
+			<!--<div onclick="dialogShow()" style="font-size: 22px; color: white;" class="mui-icon mui-action-menu mui-icon-search mui-pull-right"></div>-->
+		</div>
+
+		<!-- 弹出window: 站点选择 -->
+		<div id="sitePopupwindow" class="mui-popover" style="border-radius: 7px; height: 240px;">
+			<div class="mui-popover-arrow"></div>
+			<div id="hosList" class="mui-scroll-wrapper" style="height: 230px; overflow:hidden">
+				<div class="mui-scroll">
+					<ul class="mui-table-view" id="sitelist">
+
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- 弹出window: status -->
+		<div id="statusPopupWindow" class="mui-popover" style="height:310px;">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view" id="consultStatuslist">
+						<li class="mui-table-view-cell li_consult" data-id="">
+							<a href="#">全部状态</a>
+						</li>
+						<li class="mui-table-view-cell li_consult" data-id="7">
+							<a href="#">待转诊</a>
+						</li>
+						<li class="mui-table-view-cell li_consult" data-id="10">
+							<a href="#">已分诊</a>
+						</li>
+						<li class="mui-table-view-cell li_consult" data-id="9">
+							<a href="#">已转诊</a>
+						</li>
+						<li class="mui-table-view-cell li_consult" data-id="8">
+							<a href="#">已退回</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- 筛选Dialog -->
+		<div id="selectDialog" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-content-padded">
+				<h4 id="title" style="text-align: center;margin-top: 10px;">查询</h4>
+				<div class="mui-input-row">
+					<input id="triageDetails" type="text" class="mui-input-clear" placeholder="病理号或者姓名" style="font-size: 16px;padding: 4px;margin: 3px; width: 98%; height: 32px;">
+				</div>
+				<h5 class="mui-content-padded">病理类型：</h5>
+				<button id='typeItem' class="mui-btn mui-btn-block" style="width: 98%;" type='button'>选择类型</button>
+				<div style="margin-top:10px; margin-right: 1px; width: 49%; float: left">
+					<button type="button" onclick="search()" class="mui-btn mui-btn-primary mui-btn-block" style="">确定</button>
+				</div>
+				<div style="margin-top:10px; margin-left: 1px; width: 49%; float: left">
+					<button type="button" onclick="clearCondition()" class="mui-btn mui-btn-primary mui-btn-block" style="">清空</button>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<input type="hidden" id="hiddenStatus" />
+	<input type="hidden" id="hiddenSite" />
+	<input type="hidden" id="hiddenType" />
+	<input type="hidden" id="hiddenDetails" />
+	<input type="hidden" id="hiddenCurrentCount" />
+
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/mui.picker.min.js "></script>
+
+	<script src="../js/mui.poppicker.js"></script>
+	<script src="../js/jquery-1.11.0.js " type="text/javascript " charset="utf-8 "></script>
+	<!--<script type="text/javascript " src="../js/common.js "></script>-->
+	
+	<script type="text/javascript" src="Controller/distributionApi.js"></script>
+
+	<script type="text/javascript" src="Controller/const.js"></script>
+	<script type="text/javascript" src="Controller/UtilHelper.js"></script>
+	<script type="text/javascript" src="Controller/referralList_controller.js.js"></script>
+
+</html>

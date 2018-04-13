@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" />
+		<style>
+			#topPopover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+			}
+			
+			#topPopover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			
+			p {
+				text-indent: 22px;
+			}
+			
+			span.mui-icon {
+				font-size: 14px;
+				color: #007aff;
+				margin-left: -15px;
+				padding-right: 10px;
+			}
+			
+			.mui-popover {
+				height: 230px
+			}
+			
+			.mui-btn {
+				font-size: 16px;
+				padding: 4px;
+				margin: 3px;
+			}
+			
+			p {
+				text-indent: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--侧滑菜单容器-->
+		<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable mui-slide-in">
+			<!--菜单部分-->
+			<aside id="offCanvasSide" class="mui-off-canvas-right" style="max-width: 300px;">
+				<div id="offCanvasSideScroll" class="mui-scroll-wrapper" style="background: white;">
+					<div class="mui-scroll">
+						<button id="offCanvasHide" type="button" class="mui-btn mui-btn-danger mui-btn-block" style="padding: 5px 20px; width: 98%;">关闭菜单</button>
+						<h5 class="mui-content-padded">申请医院：</h5>
+						<a href="#topPopover3" id="sitetitle" style="width: 98%;" class="mui-btn  mui-btn-block">全部医院</a>
+						<h5 class="mui-content-padded">申请时间：</h5>
+						<button id="btn_starttime" style="width: 98%;" data-options='{"type":"date"}' class="btn mui-btn mui-btn-block">请选择开始时间</button>
+						<button id="btn_endtime" style="width: 98%; " data-options='{"type":"date"}' class="btn mui-btn mui-btn-block">请选择结束时间</button>
+						<h5 class="mui-content-padded">诊断时间：</h5>
+						<button id="btn_dstarttime" style="width: 98%;" data-options='{"type":"date"}' class="btn mui-btn mui-btn-block">请选择开始时间</button>
+						<button id="btn_dendtime" style="width: 98%;" data-options='{"type":"date"}' class="btn mui-btn mui-btn-block">请选择结束时间</button>
+						<button type="button" onclick="btnselectdata()" class="mui-btn mui-btn-primary mui-btn-block" style="margin-top:10px; width: 98%; ">确定</button>
+						<button type="button" onclick="clearselectdata()" class="mui-btn mui-btn-primary mui-btn-block" style="margin-top: 10px; width: 98%;">清空</button>
+					</div>
+				</div>
+			</aside>
+			<div class="mui-inner-wrap">
+				<header class="mui-bar mui-bar-nav" style="background-color:#3188DE;color: white; ">
+					<a id="btnback" type="button" class="mui-action-back mui-icon mui-icon-back mui-pull-left" style="color: white;"></a>
+					<a id="offCanvasBtn" href="#offCanvasSide" style="color: white;" class="mui-icon mui-action-menu mui-icon-search mui-pull-right"></a>
+					<h1 class="mui-title" style="color: white;">统计报表</h1>
+				</header>
+				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper" style="padding-bottom: 45px;">
+					<div class="mui-scroll">
+						<div class="mui-content">
+							<div style="  background-color: #f0fbfc; position: absolute;top: 2px; left: 0;right: 0;">
+								<ul class="mui-table-view">
+									<li class="mui-table-view-cell">
+										<table style="width: 100%;">
+											<tr>
+												<td>
+													<p style="text-align: center; color: #51c4d4; line-height: 25px;font-size: 22px;" id="AllNum1">0例</p>
+													<p style="text-align: center; color: #51c4d4; line-height: 25px;">待诊断</p>
+												</td>
+												<td>
+													<p style="text-align: center; color: #51c4d4; line-height: 25px;font-size: 22px;" id="AllNum2">0例</p>
+													<p style="text-align: center; color: #51c4d4; line-height: 25px;">已诊断</p>
+												</td>
+												<td>
+													<p style="text-align: center; color: #51c4d4; line-height: 25px;font-size: 22px;" id="AllNum3">0例</p>
+													<p style="text-align: center; color: #51c4d4; line-height: 25px;">退回</p>
+												</td>
+
+											</tr>
+										</table>
+
+									</li>
+
+								</ul>
+							</div>
+							<ul class="mui-table-view" style="margin-top:80px;" id="ultotallist">
+
+							</ul>
+							<div id="div_loading" align="center" style="display: none;">
+								<div class="mui-pull-loading mui-icon mui-spinner mui-visibility"></div>
+								<div class="mui-pull-caption mui-pull-caption-refresh" style="font-weight: 700;color: #777;">正在加载...</div>
+							</div>
+							<div>
+							</div>
+
+						</div>
+					</div>
+					<!--<div style="position: absolute; bottom: 0px; background: white; width: 100%;border-top:1px solid #efeff4 ;z-index: 100;" align="right">
+						<p style="font-size:18px ; line-height: 25px; padding-top:10px ;">共<span id="sp_numtotal"></span>例&nbsp;&nbsp;共计<span id="sp_nummoney"></span>元&nbsp;&nbsp;</p>
+					</div>-->
+					<!-- off-canvas backdrop -->
+					<div class="mui-off-canvas-backdrop"></div>
+				</div>
+				<div style="position: absolute; bottom: 0px; background: white; width: 100%;border-top:1px solid #efeff4 ;z-index: 100;" align="right">
+					<p style="font-size:18px ; line-height: 25px; padding-top:10px ;">共<span id="sp_numtotal"></span>例&nbsp;&nbsp;共计<span id="sp_nummoney"></span>元&nbsp;&nbsp;</p>
+				</div>
+			</div>
+		</div>
+		<div id="topPopover3" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view" id="sitelist">
+
+					</ul>
+				</div>
+			</div>
+		</div>
+		<input type="hidden" id="hidden_siteid" />
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script src="js/mui.picker.min.js "></script>
+	<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js"></script>
+	<script>
+		//初始化滚动
+		scroll();
+
+		function scroll() {
+			mui('.mui-scroll-wrapper').scroll({});
+		}
+
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+		var statisticsdata = [
+			'<li class="mui-table-view-cell">',
+			'<p style="margin-bottom:2px"><i class="mui-icon mui-icon-home"></i>@HisName</p>',
+			'<p style="position: absolute;  right: 14px; top: 14px;">共@totalcount例</p>',
+			'<div style="border-bottom:2px solid #efeff4 ; margin-bottom: 4px;"></div>',
+			'<table style="width: 100%;">',
+			'<tr>',
+			'<td>',
+			'<p style="text-align: center; color: #51c4d4; line-height: 20px;" >@num1例</p>',
+			'<p style="text-align: center; color: #51c4d4; line-height: 20px;font-size: 12px">待诊断</p>',
+			'</td>',
+			'<td>',
+			'<p style="text-align: center; color: #51c4d4; line-height: 20px;" >@num2例</p>',
+			'<p style="text-align: center; color: #51c4d4; line-height: 20px;font-size: 12px">已诊断</p>',
+			'</td>',
+			'<td>',
+			'<p style="text-align: center; color: #51c4d4; line-height: 20px;" >@num3例</p>',
+			'<p style="text-align: center; color: #51c4d4; line-height: 20px;font-size: 12px;">退回</p>',
+			'</td>',
+			'</tr>',
+			'</table>',
+
+			'</li>'
+		]
+		var sitemode = [
+			'<li class="mui-table-view-cell lisiteid" data-id="@HisID">',
+			'<a href="#">@sitename</a>',
+			'</li>'
+		]
+		mui.ready(function() {
+			LoadSite();
+			GetCount();
+			var ispad = getQueryString2("ipad");
+			if(ispad == "1") {
+				jQuery("#btnback").css("display", "none");
+			}
+
+		});
+
+		function btnselectdata() {
+			//mui('#pullrefresh').pullRefresh().pullupLoading();
+			//pulldownRefresh();
+			jQuery("#div_loading").css("diaplay", "");
+			GetCount();
+			var offCanvasWrapper = mui('#offCanvasWrapper');
+			offCanvasWrapper.offCanvas('close');
+
+			mui('#offCanvasContentScroll').scroll().scrollTo(0, 0, 100); //100毫秒滚动到顶
+		}
+
+		// 清除查询
+		function clearselectdata() {
+			jQuery("#sitetitle").val("全部医院");
+			jQuery("#sitetitle").text("全部医院");
+			jQuery("#hidden_siteid").val("");
+
+			jQuery("#btn_starttime").val("");
+			jQuery("#btn_starttime").text("请选择开始时间");
+
+			jQuery("#btn_endtime").val("");
+			jQuery("#btn_endtime").text("请选择结束时间");
+
+			jQuery("#btn_dstarttime").val("");
+			jQuery("#btn_dstarttime").text("请选择开始时间");
+
+			jQuery("#btn_dendtime").val("");
+			jQuery("#btn_dendtime").text("请选择结束时间");
+
+			//jQuery("#div_loading").css("diaplay", "");
+			GetCount();
+			var offCanvasWrapper = mui('#offCanvasWrapper');
+			//offCanvasWrapper.offCanvas('close');
+		}
+
+		//加载站点
+		function LoadSite() {
+			var userInfo = localStorage.getItem("userInfo");
+			var user = userInfo ? window.eval("( " + userInfo + ") ") : " ";
+
+			jQuery.ajax(resturl + 'GetSiteByExp', {
+				data: {
+					UserID: user.userid
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				cache: false,
+				success: function(data) {
+					var div = " ";
+					data = eval(data);
+					if(data.length > 0) {
+						div += sitemode.join('').replace(/@sitename/, "全部医院")
+							.replace(/@HisID/, "0")
+						for(var i = 0; i < data.length; i++) {
+
+							div += sitemode.join('').replace(/@sitename/, data[i].HisName)
+								.replace(/@HisID/, data[i].HisID)
+
+						}
+						jQuery("#sitelist").html(div);
+						mui('#sitelist').on('tap', '.mui-table-view-cell', function() {
+							var HisID = this.getAttribute('data-id');
+
+							jQuery('.mui-backdrop').removeClass('mui-active');
+							$('#sitetitle').text(this.innerText);
+							mui('#topPopover3').popover('hide');
+							jQuery("#div_loading").css("diaplay", "");
+							jQuery("#hidden_siteid").val(HisID);
+							//GetCount();
+
+							//selectData(0, 0);
+						});
+					}
+
+				},
+				error: function(xhr, type, errorThrown) {
+					if(type == 'timeout') {
+						mui.toast("网络不给力，请重新操作！");
+					}
+				}
+			});
+		}
+
+		document.getElementById('offCanvasHide').addEventListener('tap', function() {
+			var offCanvasWrapper = mui('#offCanvasWrapper');
+			offCanvasWrapper.offCanvas('close');
+		});
+
+		function GetCount() {
+			var userInfo = localStorage.getItem("userInfo");
+			var user = userInfo ? window.eval("(" + userInfo + ")") : "";
+			jQuery.ajax(resturl + 'GetExpDiagnosticCount', {
+				data: {
+					ExpID: user.userid,
+					sdate: jQuery("#btn_starttime").val(),
+					edate: jQuery("#btn_endtime").val(),
+					dsdate: jQuery("#btn_dstarttime").val(),
+					dedate: jQuery("#btn_dendtime").val(),
+					HisID: jQuery("#hidden_siteid").val()
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				cache: false,
+				success: function(data) {
+					var div = "";
+
+					data = eval(data);
+
+					if(data.length > 0) {
+						var tnum1 = 0;
+						var tnum2 = 0;
+						var tnum3 = 0;
+						var tnum4 = 0;
+						for(var i = 0; i < data.length; i++) {
+							// 判断是否有诊断时间条件，如果存在，筛选去除所有不存在已诊断数据的item
+							if(isJustDiagnosis()) {
+								// 在存在已诊断数据的情况下显示并统计，否则不显示
+								if(Number(data[i].num2) != 0) {
+									var total = Number(data[i].num1) + Number(data[i].num2) + Number(data[i].num3);
+									div += statisticsdata.join('').replace(/@HisName/, data[i].HisName)
+										.replace(/@num1/, data[i].num1)
+										.replace(/@num2/, data[i].num2)
+										.replace(/@num3/, data[i].num3)
+										.replace(/@totalcount/, total)
+									tnum1 += Number(data[i].num1);
+									tnum2 += Number(data[i].num2);
+									tnum3 += Number(data[i].num3);
+									tnum4 += Number(data[i].num4);
+								}
+							} else {
+								var total = Number(data[i].num1) + Number(data[i].num2) + Number(data[i].num3);
+								div += statisticsdata.join('').replace(/@HisName/, data[i].HisName)
+									.replace(/@num1/, data[i].num1)
+									.replace(/@num2/, data[i].num2)
+									.replace(/@num3/, data[i].num3)
+									.replace(/@totalcount/, total)
+								tnum1 += Number(data[i].num1);
+								tnum2 += Number(data[i].num2);
+								tnum3 += Number(data[i].num3);
+								tnum4 += Number(data[i].num4);
+							}
+
+						}
+						jQuery("#AllNum1").html(tnum1 + "例");
+						jQuery("#AllNum2").html(tnum2 + "例");
+						jQuery("#AllNum3").html(tnum3 + "例");
+						jQuery("#sp_numtotal").html(tnum1 + tnum2 + tnum3);
+						jQuery("#sp_nummoney").html(tnum4);
+						jQuery('#ultotallist').html(div);
+					} else {
+						jQuery("#AllNum1").html("0例");
+						jQuery("#AllNum2").html("0例");
+						jQuery("#AllNum3").html("0例");
+						jQuery("#sp_numtotal").html(0);
+						jQuery("#sp_nummoney").html(0);
+						jQuery('#ultotallist').html("<div align=\"center\"><p>暂无历史记录</p></div>");
+					}
+				}
+			});
+		}
+
+		// 判定是否使用诊断时间条件
+		function isJustDiagnosis() {
+			var startDiagnosisTime = jQuery("#btn_dstarttime").val();
+			var endDiagnosisTime = jQuery("#btn_dendtime").val();
+
+			if((startDiagnosisTime != null && startDiagnosisTime != '') || (endDiagnosisTime != null && endDiagnosisTime != ''))
+				return true;
+			else
+				return false;
+
+		}
+
+		(function($) {
+			$.init();
+			var result = $('#result')[0];
+			var btns = $('.btn');
+			btns.each(function(i, btn) {
+				btn.addEventListener('tap', function() {
+					var optionsJson = this.getAttribute('data-options') || '{}';
+					var options = JSON.parse(optionsJson);
+					var id = this.getAttribute('id');
+					/*
+					 * 首次显示时实例化组件
+					 * 示例为了简洁，将 options 放在了按钮的 dom 上
+					 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+					 */
+					var picker = new $.DtPicker(options);
+					picker.show(function(rs) {
+						/*
+						 * rs.value 拼合后的 value
+						 * rs.text 拼合后的 text
+						 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+						 * rs.m 月，用法同年
+						 * rs.d 日，用法同年
+						 * rs.h 时，用法同年
+						 * rs.i 分（minutes 的第二个字母），用法同年
+						 */
+						jQuery("#" + id).val(rs.text);
+						jQuery("#" + id).text(rs.text);
+						/* 
+						 * 返回 false 可以阻止选择框的关闭
+						 * return false;
+						 */
+						/*
+						 * 释放组件资源，释放后将将不能再操作组件
+						 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+						 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+						 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+						 */
+						picker.dispose();
+					});
+				}, false);
+			});
+		})(mui);
+	</script>
+
+</html>

@@ -1,0 +1,61 @@
+D:\Backup\我的文档\Downloads\WcfRestServiceSecurity1\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.dll
+D:\Backup\我的文档\Downloads\WcfRestServiceSecurity1\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.pdb
+D:\Backup\我的文档\Downloads\WcfRestServiceSecurity1\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\Newtonsoft.Json.dll
+D:\Backup\我的文档\Downloads\WcfRestServiceSecurity1\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\ResolveAssemblyReference.cache
+D:\Backup\我的文档\Downloads\WcfRestServiceSecurity1\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.dll
+D:\Backup\我的文档\Downloads\WcfRestServiceSecurity1\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.pdb
+D:\Project\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.dll.config
+D:\Project\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.dll
+D:\Project\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.pdb
+D:\Project\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\Newtonsoft.Json.dll
+D:\Project\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.dll
+D:\Project\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.pdb
+D:\Project\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\MoblieRestService.csprojResolveAssemblyReference.cache
+D:\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.dll
+D:\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.pdb
+D:\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\Newtonsoft.Json.dll
+D:\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\MoblieRestService.csprojResolveAssemblyReference.cache
+D:\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.dll
+D:\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.pdb
+D:\DiagnosisApp\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.dll
+D:\DiagnosisApp\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.pdb
+D:\DiagnosisApp\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\Newtonsoft.Json.dll
+D:\DiagnosisApp\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\MoblieRestService.csprojResolveAssemblyReference.cache
+D:\DiagnosisApp\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.dll
+D:\DiagnosisApp\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.pdb
+D:\Project\Moblie\DiagnosisApp\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.dll
+D:\Project\Moblie\DiagnosisApp\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.pdb
+D:\Project\Moblie\DiagnosisApp\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\Newtonsoft.Json.dll
+D:\Project\Moblie\DiagnosisApp\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\MoblieRestService.csprojResolveAssemblyReference.cache
+D:\Project\Moblie\DiagnosisApp\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.dll
+D:\Project\Moblie\DiagnosisApp\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.pdb
+F:\workspace\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.dll
+F:\workspace\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.pdb
+F:\workspace\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\Newtonsoft.Json.dll
+F:\workspace\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\MoblieRestService.csprojResolveAssemblyReference.cache
+F:\workspace\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.dll
+F:\workspace\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.pdb
+D:\workspace\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.dll.config
+D:\workspace\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.dll
+D:\workspace\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.pdb
+D:\workspace\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\Newtonsoft.Json.dll
+D:\workspace\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\MoblieRestService.csprojResolveAssemblyReference.cache
+D:\workspace\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.dll
+D:\workspace\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.pdb
+G:\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.dll
+G:\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.pdb
+G:\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\Newtonsoft.Json.dll
+G:\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.dll
+G:\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.pdb
+G:\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\MoblieRestService.csprojResolveAssemblyReference.cache
+D:\workspace\kfbio Moblie\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.dll
+D:\workspace\kfbio Moblie\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.pdb
+D:\workspace\kfbio Moblie\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\Newtonsoft.Json.dll
+D:\workspace\kfbio Moblie\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\MoblieRestService.csprojResolveAssemblyReference.cache
+D:\workspace\kfbio Moblie\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.dll
+D:\workspace\kfbio Moblie\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.pdb
+G:\Kfbio-Mo\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.dll
+G:\Kfbio-Mo\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\WcfRestServiceSecurity1.pdb
+G:\Kfbio-Mo\WcfRestServiceSecurity1\WcfRestServiceSecurity1\bin\Newtonsoft.Json.dll
+G:\Kfbio-Mo\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.dll
+G:\Kfbio-Mo\WcfRestServiceSecurity1\WcfRestServiceSecurity1\obj\Debug\WcfRestServiceSecurity1.pdb

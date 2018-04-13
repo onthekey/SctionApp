@@ -1,0 +1,89 @@
+/*跨webview需要手动指定位置*/
+
+.mui-plus header.mui-bar {
+	display: none!important;
+}
+
+.mui-plus .mui-bar-nav~.mui-content {
+	padding: 0!important;
+}
+
+.mui-plus .plus {
+	display: inline;
+}
+
+.plus {
+	display: none;
+}
+
+#sitePopupwindow {
+	position: fixed;
+	top: 40px;
+	left: 6px;
+}
+
+#sitePopupwindow .mui-popover-arrow {
+	left: 6px;
+	right: auto;
+}
+
+#statusPopupWindow {
+	position: fixed;
+	top: 40px;
+	right: 6px;
+}
+
+#statusPopupWindow .mui-popover-arrow {
+	left: auto;
+	right: 6px;
+}
+
+p {
+	text-indent: 22px;
+}
+
+span.mui-icon {
+	font-size: 14px;
+	color: #007aff;
+	margin-left: -15px;
+	padding-right: 10px;
+}
+
+.mui-popover {
+	height: 230px
+}
+
+.mui-btn {
+	font-size: 16px;
+	padding: 4px;
+	margin: 3px;
+}
+
+#selectDialog {
+	min-width: 282px;
+	max-width: 282px;
+	/*height: 300px;*/
+	height: 200px;
+	top: 50% !important;
+	margin-top: -150px;
+	left: 50% !important;
+	margin-left: -141px;
+}
+
+#selectDialog .mui-popover-arrow {
+	display: none !important;
+}
+
+#selectDialog .operate {
+	text-align: center;
+	margin-top: 20px
+}
+
+.fromexp {
+	width: 120px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+}

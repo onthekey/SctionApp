@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color:#3188DE; ">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+			<h1 id="title" class="mui-title" style="color: white;">附件浏览</h1>
+		</header>
+	</body>
+	<script src="js/mui.min.js"></script>
+		<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript">
+
+	   $("#title").html(decodeURI(getQueryString2("title")))
+	    var annexUrl=getQueryString2("annexUrl");
+		var Status=getQueryString2("Status");
+		var url = coreurl + "/PicViewer/index.html?path=../PdfViewer/BrowerHandler.ashx";
+		var jumpurl = url + "?path=" + encodeURI(getQueryString2("annexpath"));
+		
+		if(Status!="1"){
+			url = coreurl + "/PicViewer/index.html?path=../PdfViewer/BrowerHandler.ashx";
+			jumpurl = url + "?path=" + annexUrl + "/API/xViewer?path=" + encodeURI(getQueryString2("annexpath"));
+		}
+		mui.init({
+
+			subpages:[{
+				url:jumpurl,
+				id:'annex.html',
+				styles:{
+					top: '40px',
+					bottom: '0px',
+				}
+			}]
+		});
+		</script>
+</html>

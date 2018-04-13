@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>KFBIO病理远程会诊平台</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" href="../css/newfont.css " />
+	</head>
+
+	
+	<body>
+		
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-content" style="background: white;">
+				<ul class="mui-table-view" style=" margin-top: 0px;">
+					<li class="mui-table-view-cell mui-media">
+						<a href="javascript:;">
+							<img class="mui-media-object mui-pull-left" src="../images/slider2.jpg" style=" border-radius: 50%;">
+							<div class="mui-media-body mui-ellipsis">
+								分配端
+								<p id="center" class='mui-ellipsis'>分配中心</p>
+							</div>
+							<span id='settingTab' class='mui-badge mui-badge-primary mui-badge-inverted mui-icon mui-icon-settings'>
+								
+							</span>
+						</a>
+					</li>
+				</ul>
+				<div id="slider" class="mui-slider" style="height: 180px; width: 100%;">
+					<div class="mui-slider-group mui-slider-loop">
+						<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#">
+								<img src="../images/slider4.jpg"style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+						<!-- 第一张 -->
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="../images/slider2.jpg" style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+						<!-- 第二张 -->
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="../images/slider1.jpg" style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+						<!-- 第三张 -->
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="../images/slider3.jpg" style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+						<!-- 第四张 -->
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="../images/slider4.jpg" style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+						<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#">
+								<img src="../images/slider2.jpg" style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+					</div>
+					<div class="mui-slider-indicator">
+						<div class="mui-indicator mui-active"></div>
+						<div class="mui-indicator"></div>
+						<div class="mui-indicator"></div>
+						<div class="mui-indicator"></div>
+					</div>
+				</div>
+				<ul class="mui-table-view mui-grid-view mui-grid-9" style="background: white;" id="list">
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" data-id="notTriage" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon newiconfont icon-dengdaibuchongziliao">
+								<span class="mui-badge" ID="notTriageCount">0</span></span>
+							<div class="mui-media-body">待分诊</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" data-id="triage" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon iconfont icon-shenhe2">
+								<span class="mui-badge" ID="triageCount" >0</span></span>
+							<div class="mui-media-body">已分诊</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" data-id="multiExpert" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon  newiconfont icon-duo">
+								<span class="mui-badge " ID="multiExpertCount" style="background-color: #007aff">0</span></span>
+								
+							<div class="mui-media-body">多专家</div>
+						</a>
+					</li>
+
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" data-id="backTriage" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon iconfont icon-tuihuiyanshou">
+								<span class="mui-badge" ID="backTriageCount" style="background-color: #007aff">0</span></span>
+							<div class="mui-media-body">被退回</div>
+						</a>
+					</li>
+					<!--<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" data-id="recycle" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon  newiconfont icon-yiantaolun">
+								<span class="mui-badge" ID="recycleCount" style="background-color: #007aff">0</span></span>
+							<div class="mui-media-body">回收病例</div>
+						</a>
+					</li>-->
+
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" class="indexclass" data-id="reservation">
+							<span style="color: #1296db;" class="mui-icon iconfont icon-yuyuejiuzhen">
+								<span class="mui-badge" ID="reservationCount" style="background-color: #007aff">0</span></span>
+							<div class="mui-media-body">冰冻预约</div>
+						</a>
+					</li>
+					
+					<!--<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="" class="indexclass" data-id="referral"  >							
+								<span style="color: #1296db;" class="mui-icon newiconfont icon-tab">
+								<span class=" mui-badge mui-badge-primary" ID="referralCount" style="top:11%; color:#FFFFFF; background-color: #007aff ">0</span>
+							
+							</span>
+							<div class="mui-media-body">转诊管理</div>
+						</a>
+					</li>-->
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" data-id="statistics" class="indexclass">
+							<span style="color: #1296db;top: 26%;" class="mui-icon iconfont icon-ziyuantongji"></span>
+							<div class="mui-media-body">统计报表</div>
+						</a>
+					</li>
+
+					<!--<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" data-id="setting" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon iconfont icon-shezhi"></span>
+							<div class="mui-media-body">设置</div>
+						</a>
+					</li>-->
+				</ul>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+
+	<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	<!--<script src="../js/common.js"></script>-->
+	
+	<script type="text/javascript" src="Controller/distributionApi.js"></script>
+	
+	<script type="text/javascript" src="Controller/const.js"></script>
+	<script type="text/javascript" src="Controller/UtilHelper.js"></script>
+	<script type="text/javascript" src="Controller/index_sub_controller.js"></script>
+	</body>
+</html>

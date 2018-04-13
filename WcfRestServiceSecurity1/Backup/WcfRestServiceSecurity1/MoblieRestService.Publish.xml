@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="C:\Users\whguardian\Desktop" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="配置文件1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="bin/WcfRestServiceSecurity1.pdb" publishTime="05/22/2017 11:07:22" />
+    <file relUrl="bin/WcfRestServiceSecurity1.dll" publishTime="05/22/2017 11:07:22" />
+    <file relUrl="bin/Newtonsoft.Json.dll" publishTime="03/02/2015 15:50:40" />
+    <file relUrl="Global.asax" publishTime="03/08/2016 20:41:58" />
+    <file relUrl="Web.config" publishTime="05/22/2017 13:20:55" />
+  </publishProfile>
+</publishData>

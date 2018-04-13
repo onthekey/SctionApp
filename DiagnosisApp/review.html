@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="css/mui.min.css">
+		<!--App自定义的css-->
+
+		<link href="fonts/iconfont.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+
+	</head>
+
+	<body style="background-color: white;">
+
+		<header class="mui-bar mui-bar-nav" style="background-color:#3188DE; ">
+			<a style="color: white;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"> </a>
+			<h1 class="mui-title" style="color: white;">复核报告</h1>
+
+		</header>
+		<div class="mui-content" style="background-color: white; ">
+
+			<form class="mui-input-group" id="explist">
+				<div class="mui-loading">
+					<div class="mui-spinner">
+					</div>
+				</div>
+
+			</form>
+
+			<div align="center" style="margin-top: 8px;"><button id="confirmBtn">确定</button></div>
+		</div>
+
+		<script src="js/mui.min.js"></script>
+		<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script>
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			var deceleration = mui.os.ios ? 0.003 : 0.0009;
+			mui('#scroll1').scroll({
+				bounce: false,
+				indicators: true, //是否显示滚动条
+				deceleration: deceleration
+			});
+			mui.ready(function() {
+
+				GetExpInfo();
+			});
+			var Returndata = [
+				'<div class="mui-input-row mui-radio mui-left">',
+				'<label>@DisplayName</label>',
+				'<input name="expradio" type="radio" value="@UserID">',
+				'</div>'
+			]
+
+			function GetExpInfo() {
+				var userInfo = localStorage.getItem("userInfo");
+				var user = userInfo ? window.eval("(" + userInfo + ")") : "";
+				jQuery.ajax(resturl + 'GetReviewExpert', {
+					data: {
+						ConsultID: getQueryString2("ConsultID"),
+						UserID: user.userid
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					cache: false,
+					success: function(data) {
+						var div = "";
+						data = eval(data);
+						if(data.length > 0) {
+							for(var i = 0; i < data.length; i++) {
+
+								div += Returndata.join('').replace(/@DisplayName/, data[i].DisplayName)
+									.replace(/@UserID/, data[i].UserID)
+
+							}
+							jQuery('#explist').html(div);
+						} else {
+
+							jQuery('#explist').html("暂无选择专家！");
+						}
+					}
+				});
+
+			}
+			
+			// 选择复核专家
+			document.getElementById("confirmBtn").addEventListener('tap', function() {
+				var Diagnosis = decodeURI(escape(getQueryString2("TextDiagnosis")));
+				var Diagnosis_Remark = decodeURI(escape(getQueryString2("Diagnosis_Remark")));
+				var z_Mirror = decodeURI(escape(getQueryString2("z_Mirror")));
+
+				//判定是否已选择专家，if null break
+				var invitedID = jQuery('input:radio[name="expradio"]:checked').val();
+				if(invitedID == "" || invitedID == undefined) {
+					mui.toast("请选择一位专家");
+				} else {
+					var btnArray = ['否', '是'];
+					mui.confirm('确定该专家复核吗？', '提示', btnArray, function(e) {
+						if(e.index == 1) {
+
+							var id = jQuery('input:radio[name="expradio"]:checked').val();
+
+							if(id != "" && id != undefined) {
+								// 原生UI添加
+								plus.nativeUI.showWaiting("数据提交中...");
+								var userInfo = localStorage.getItem("userInfo");
+								var user = userInfo ? window.eval("(" + userInfo + ")") : "";
+								jQuery.ajax(resturl + 'ReviewReport', {
+									data: JSON.stringify({
+										ConsultID: getQueryString2("ConsultID"),
+										UserID: id,
+										Diagnosis: encodeURI(Diagnosis),
+										Diagnosis_Remark: encodeURI(Diagnosis_Remark),
+										z_Mirror: encodeURI(z_Mirror)
+									}),
+									dataType: 'json', //服务器返回json格式数据
+									type: 'post', //HTTP请求类型
+									timeout: 10000, //超时时间设置为10秒；
+									cache: false,
+									success: function(data) {
+										data = eval(data);
+										if(data == "1") {
+											if(navigator.userAgent.indexOf("Html5Plus") < 0) { //不支持5+ API
+												jump("caselist_mian.html?type=" + getQueryString2("type"), 'caselist', {
+
+												});
+											} else { //支持5+ API
+												plus.webview.close("report.html");
+												plus.webview.close("caseinfo.html");
+												if (!mui.os.android) {
+													if (mui.os.iphone) {
+														plus.webview.getWebviewById("caselist").evalJS("refresh()");
+													} else {
+														plus.webview.getWebviewById("caselist").evalJS("refreshData()");
+													}
+												} else {
+													plus.webview.getWebviewById("caselist").evalJS("refresh()");
+												}
+												// 原生UI添加
+												plus.nativeUI.closeWaiting();
+												mui.back();
+											}
+											//GetExpInfo();
+										}
+									},
+									error: function(xhr, type, errorThrown) {
+										if(type == 'timeout') {
+											plus.nativeUI.closeWaiting();
+											mui.toast("网络不给力，请重新操作！");
+										}
+									}
+								});
+							} else {
+
+								mui.toast("请选择一位专家");
+							}
+
+						}
+					})
+				}
+			});
+		</script>
+	</body>
+
+</html>

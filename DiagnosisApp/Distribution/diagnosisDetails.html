@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/mui.picker.min.css" />
+		<!--App自定义的css-->
+		<link href="../css/mystyle.css" rel="stylesheet">
+
+		<link rel="stylesheet" href="base/iconfont/material-icons.css" />
+
+		<link rel="stylesheet" href="widget/expertList_view.css" />
+		<link rel="stylesheet" href="style/diagnosisDetails.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color:#3188DE;">
+			<a style="color: white;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"> </a>
+			<h1 class="mui-title" style="color: white;" id="ToolbarTitle">详情</h1>
+		</header>
+		<div id="details_layout" class="mui-off-canvas-wrap mui-draggable mui-slide-in" 
+			style="z-index: 99; position: relative;">
+			<div class="mui-inner-wrap">
+				<header class="mui-bar mui-bar-nav" style="background-color:#3188DE;">
+					<a style="color: white;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"> </a>
+					<h1 class="mui-title" style="color: white;" id="ToolbarTitle"></h1>
+				</header>
+				<div class="mui-content" style="background-color: white;">
+					<div id="slider" class="mui-slider mui-fullscreen" 
+						style="box-shadow: 0px 2px 2px #444444;">
+						<div id="sliderSegmentedControl" 
+							class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" 
+							style="">
+							<a class="mui-control-item" href="#detailsLayout">
+								病例
+							</a>
+							<a class="mui-control-item" href="#slidesLayout">
+								切片<span class="mui-badge mui-badge-primary" 
+									style="position: absolute; margin-left: -6px;" id="span_slide_count">0</span>
+							</a>
+							<a class="mui-control-item" href="#annexesLayout">
+								附件<span class="mui-badge mui-badge-primary"
+									 style="position: absolute; margin-left: -6px;" id="span_annex_count">0</span>
+							</a>
+							<a class="mui-control-item" href="#messageLayout">
+								留言
+							</a>
+						</div>
+						<div id="sliderProgressBar" class="mui-slider-progress-bar" style="width: 25%;"></div>
+						<div class="mui-slider-group">
+
+							<!-- 详情 -->
+							<div id="detailsLayout" class="mui-slider-item mui-control-content mui-active">
+								<div id="scroll1" class="mui-scroll-wrapper" style="height: auto;">
+									<div class="mui-scroll">
+										<div class="mui-loading" id="LoadingAnimation">
+											<div class="mui-spinner">
+											</div>
+										</div>
+										<div id="details" style="display: none">
+											<ul class="case_content_report">
+
+												<li style="margin: 0px 15px; padding: 2px 0px;">
+													<p style="word-wrap:break-word"><span>原病理号：</span><span id="span_caseNo"></span></p>
+													<p style="word-wrap:break-word"><span>患者信息：</span><span id="span_info"></span></p>
+													<p style="word-wrap:break-word"><span>送检单位：</span><span id="span_sent_Hospital"></span></p>
+													<p style="word-wrap:break-word"><span>送检时间：</span><span id="span_received_Date"></span></p>
+													<p style="word-wrap:break-word"><span>取材部位：</span><span id="span_materialParts"></span></p>
+													<p style="word-wrap:break-word"><span>临床诊断：</span><span id="span_z_diagnosis"></span></p>
+												</li>
+												<li class="contentDetailsInfo">
+													<h6>临床资料</h6>
+													<p style="word-wrap:break-word"><span id="span_clinical_Data"></span></p>
+												</li>
+
+												<li class="contentDetailsInfo">
+													<h6>大体所见</h6>
+													<p style="word-wrap:break-word"><span id="span_gennerally_See"></span></p>
+												</li>
+												<li class="contentDetailsInfo">
+													<h6>免疫组化</h6>
+													<p style="word-wrap:break-word"><span id="span_immune_Group"></span></p>
+												</li>
+
+												<li class="contentDetailsInfo">
+													<h6>原病理诊断</h6>
+													<p style="word-wrap:break-word"><span id="span_early_diagnosis"></p>
+											</li>
+											<li class="contentDetailsInfo">
+												<h6>备注</h6>
+												<p style="word-wrap:break-word"><span id="span_remark"></p>
+											</li>
+										</ul>
+										</div>
+									</div>
+								</div>						
+							</div>
+							
+							<!-- 切片列表 -->
+							<div id="slidesLayout" class="mui-slider-item mui-control-content">
+								<div id="slidesLayoutScroll" class="mui-scroll-wrapper">
+									<div class="mui-scroll">
+										<ul class="mui-table-view mui-col-xs-12" id="slidelist">
+											<div class="mui-loading">
+												<div class="mui-spinner">
+												</div>
+											</div>
+										</ul>
+									</div>
+								</div>
+							</div>
+							
+							<!-- 附件列表 -->
+							<div id="annexesLayout" class="mui-slider-item mui-control-content">
+								<div id="annexesLayoutScroll" class="mui-scroll-wrapper">
+									<div class="mui-scroll">
+										<ul class="mui-table-view mui-col-xs-12" id="annexeslist">
+											<div class="mui-loading">
+												<div class="mui-spinner">
+												</div>
+											</div>
+
+										</ul>
+									</div>
+								</div>
+							</div>
+							
+							<!-- 留言 -->
+							<div id="messageLayout" class="mui-slider-item mui-control-content">
+								<div id="messageLayoutScroll" class="mui-scroll-wrapper">
+									<div class="mui-scroll">
+										<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed" 
+											id="messageList">
+											<div class="mui-loading">
+												<div class="mui-spinner">
+												</div>
+											</div>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<footer id="bottomNavigationBar" class="bottomNavigationBarLayout" style="display: none;">
+						<div id="div_navigationBar" style="display: none; text-align: center;">							
+						</div>
+						
+						<div id="div_message" class="footer-center" style="display: none; margin-left:-40px ;">
+							<textarea id='textarea_message' type="text" class='input-text' 
+								maxlength="150" placeholder="每一条留言有150字的长度限制"></textarea>
+						</div>
+						<div id="layout_send" class="footer-right" style="display: none;">
+							<button id="btn_send_message">
+								发送
+							</button>
+						</div>
+					</footer>
+				</div>	
+			</div>		
+		</div>
+		<div id="expertListlayout">
+			<div id="expertListView">
+				<!--ListView content -->
+			</div>
+			<div class="expertListActionBar">
+				<div class="layout_btn_reservationaction">
+					<button id="cancelDistribution" class="btn_action btn_reservationaction">
+						<i class="material-icons">keyboard_return</i>
+						<div>
+							取消选择
+						</div>
+					</button>				
+				</div>
+				<div class="layout_btn_reservationaction">
+					<button id="doDistribution" class="btn_action btn_reservationaction">
+						<i class="material-icons">create</i>
+						<div>
+							完成分配
+						</div>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div id="topPopover2" class="mui-popover" style="position: fixed;">
+			<div class="mui-popover-arrow">
+				
+			</div>
+			<div style="padding: 4px;">
+				<textarea id="textarea_return" style="margin: 0px;height: 150px;" readonly="readonly">
+					
+				</textarea>
+			</div>
+		</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script type="text/javascript" src="../js/common.js"></script>-->
+		<script src="../js/mui.lazyload.js"></script>
+		<script src="../js/mui.lazyload.img.js"></script>
+		<script src="../js/mui.picker.min.js"></script>
+		
+		<script type="text/javascript" src="Controller/distributionApi.js"></script>
+		
+		<script type="text/javascript" src="Controller/const.js"></script>
+		<script type="text/javascript" src="Controller/UtilHelper.js"></script>	
+		
+		<script type="text/javascript" src="widget/expertList_view.js"></script>
+		
+		<script type="text/javascript" src="lifecycle/lifecycle_constant.js"></script>
+		<script type="text/javascript" src="lifecycle/diagnosisDetails_lifecycle.js"></script>
+		
+		<script type="text/javascript" src="Controller/diagnosisDetails_controller.js"></script>
+	</body>
+</html>

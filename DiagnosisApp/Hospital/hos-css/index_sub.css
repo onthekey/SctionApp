@@ -1,0 +1,25 @@
+   .mui-table-view-cell {
+    position: relative;
+    overflow: visible;
+    padding: 11px 15px;
+    -webkit-touch-callout: none;
+    }
+    .mui-table-view-cell:after {
+    position: relative;
+    right: 0;
+    bottom: 0;
+    left: 15px;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+}
+ .install-btn{
+ 	color: #1296db;
+ 	float:right;
+ 	font-size: 35px;
+ 	height:58px;
+ 	top:-10px;
+ 	right:-14px
+ }

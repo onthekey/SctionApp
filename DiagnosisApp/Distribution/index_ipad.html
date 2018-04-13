@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mystyle.css">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" href="../css/newfont.css" />
+
+		<link rel="stylesheet" href="style/index_ipad.css" />
+	</head>
+
+	<body>
+		<div style="left: 0px; top: 0px; width: 250px; height: 100%;background: white;  position: fixed;   " scrolling="no">
+			<div class="mui-content" style="height: 100%;background: white;">
+				<div id="div_head" class="mui-bar mui-bar-nav" style="background-color:#3188DE;  position:inherit; color: white;  height: 44px; text-align: center;">
+					<h1 id="index-title" class="mui-title" style="color: white;"></h1>
+				</div>
+				<div style="padding: 20px; width: 100px;float: left;">
+					<div style="border-radius: 50%;overflow: hidden; width: 100px; ;">
+						<img id="headPortrait" src="" style="width: 100px;height: 100px;  border: 0;">
+					</div>
+
+				</div>
+				<div style="float: left; margin-top: 40px; margin-left: 4px;">
+					<p id="displayName">欢迎您，
+					</p>
+
+					<button onclick="getDistributionCount()" class="mui-btn mui-btn-success  mui-btn-outlined mui-icon mui-icon-loop" style="float:right; margin-left: 50px;">刷新数据</button>
+				</div>
+
+				<div id="tabLayout" class="mui-content-padded">
+					<button data-id="notTriage" type="button" class="button_action mui-btn mui-btn-primary mui-btn-block">
+						<span  class="icon iconfont icon-fenpeizhenduanqingqiu" ></span>
+						待分诊
+						<span class="mui-badge" ID="notTriageCount" style="background: red; color: white;">0</span>
+					</button>
+
+					<button data-id="triage" type="button" class="button_action mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+						<span  class="icon iconfont icon-shenhe2"></span>
+						已分诊
+						<span class="mui-badge" ID="triageCount" style="background: green; color: white;">0</span>
+					</button>
+
+					<button data-id="multiExpert" type="button" class="button_action mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+						<span class="icon  iconfont icon-dedaozhenduanbaogao"></span>
+						多专家
+						<span class="mui-badge" ID="multiExpertCount" style="background: green; color: white;">0</span>
+					</button>
+
+					<button data-id="backTriage" type="button" class="button_action mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+						<span class="icon iconfont icon-tuihuiyanshou"></span>
+						被退回
+						<span class="mui-badge" ID="backTriageCount"  style="background: green; color: white;">0</span>
+					</button>
+
+					<!--<button data-id="recycle" type="recycle" class="button_action mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+						<span  class="icon iconfont icon-huizhen"></span>
+						回收病例
+						<span class="mui-badge" ID="recycleCount" style="background: green; color: white;">0</span>
+					</button>-->
+
+					<button data-id="reservation" type="button" class="button_action mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+						<span  class="icon iconfont icon-yuyuejiuzhen"></span>
+						冰冻预约
+						<span class="mui-badge" ID="reservationCount" style="background: green; color: white;">0</span>
+					</button>
+
+					<button data-id="statistics" type="button" class="button_action mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+						<span  class="icon iconfont icon-ziyuantongji"></span>
+						统计报表
+					</button>
+
+					<button data-id="setting" type="button" class="button_action mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+						<span  class="icon iconfont icon-shezhi"></span>
+						设&nbsp;&nbsp;&nbsp;&nbsp;置
+					</button>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/jquery-2.1.1.min.js" type="text/javascript"></script>
+
+	<script type="text/javascript" src="Controller/distributionApi.js"></script>
+
+	<script type="text/javascript" src="Controller/const.js"></script>
+	<script type="text/javascript" src="Controller/UtilHelper.js"></script>
+	
+	<script type="text/javascript" src="lifecycle/lifecycle_constant.js"></script>
+	<script type="text/javascript" src="lifecycle/index_ipad_lifecycle.js"></script>
+	
+	<script type="text/javascript" src="Controller/index_ipad_controller.js"></script>
+</html>

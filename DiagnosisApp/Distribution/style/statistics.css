@@ -1,0 +1,33 @@
+.selectDialog {
+	min-width: 282px;
+	max-width: 282px;
+	/*height: 300px;*/
+	height: 180px;
+	top: 50% !important;
+	margin-top: -150px;
+	left: 50% !important;
+	margin-left: -141px;
+}
+
+.selectDialog .mui-popover-arrow {
+	display: none !important;
+}
+
+.selectDialog .operate {
+	text-align: center;
+	margin-top: 20px
+}
+
+.mui-btn {
+	font-size: 16px;
+	padding: 4px;
+	margin: 3px;
+}
+
+.countLayout {
+	border-bottom-style: solid;
+	border-width: 1px;
+	border-color: #c8c7cc;
+	padding-top: 16px;
+	background-color: white;
+}

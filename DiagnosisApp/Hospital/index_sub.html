@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" href="hos-css/index_sub.css" />
+	</head>
+ 
+
+
+	<body>
+		
+		<!--下拉刷新容器-->
+		
+		<div id="pullrefresh" class="mui-scroll-wrapper">
+			
+			
+			<div class=" mui-content" style=" background:#FFFFFF;" >
+				
+				<ul class="mui-table-view" id="list-install-btn" style="height:60px; margin-top: 0px;">
+					<li class="mui-table-view-cell mui-media">
+						<a href="javascript:;">
+															
+							<span  data-id="202" class="install-btn indexclass btn-mui-table-view-cell mui-table-view-cell mui-icon mui-icon-settings"></span> 
+							<img class="mui-media-object mui-pull-left" src="../images/HisLogo.png" style=" border-radius: 50%;">
+							<div class="mui-media-body mui-ellipsis">
+								医院端
+								<p id="apply" class='mui-ellipsis'>申请医院</p>
+							</div>
+						</a>
+					</li>
+				</ul>
+				
+			
+
+				<div id="slider" class="mui-slider" style="height: 180px; width: 100%;">
+					<div class="mui-slider-group mui-slider-loop">
+						<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#">
+								<img src="../images/slider4.jpg"style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+						<!-- 第一张 -->
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="../images/slider2.jpg" style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+						<!-- 第二张 -->
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="../images/slider1.jpg" style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+						<!-- 第三张 -->
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="../images/slider3.jpg" style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+						<!-- 第四张 -->
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="../images/slider4.jpg" style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+						<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#">
+								<img src="../images/slider2.jpg" style="max-height: 220px;width: 100%;">
+							</a>
+						</div>
+					</div>
+					<div class="mui-slider-indicator">
+						<div class="mui-indicator mui-active"></div>
+						<div class="mui-indicator"></div>
+						<div class="mui-indicator"></div>
+						<div class="mui-indicator"></div>
+					</div>
+				</div>
+				
+				<ul class="mui-table-view mui-grid-view mui-grid-9" style="background: white;" id="list">
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="caselist_mian.html" data-id="0" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon iconfont icon-fenpeizhenduanqingqiu"><span class="mui-badge" ID="sp_dzd">0</span></span>
+							<div class="mui-media-body">草稿</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="caselist_mian.html" data-id="1" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon iconfont icon-shenhe2"><span class="mui-badge " ID="sp_fh" >0</span></span>
+							<div class="mui-media-body">待诊断</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="caselist_mian.html" data-id="4" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon  iconfont icon-dedaozhenduanbaogao"><span class="mui-badge " ID="sp_yzd" style="background-color: #007aff">0</span></span>
+							<div class="mui-media-body">已诊断</div>
+						</a>
+					</li>
+
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="caselist_mian.html" data-id="-1" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon mui-icon-close"><span class="mui-badge" ID="sp_th" style="background-color: #007aff">0</span></span>
+							<div class="mui-media-body">被退回</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="caselist_mian.html" data-id="-88" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon mui-icon-refresh"><span class="mui-badge" ID="sp_sy" style="background-color: #007aff">0</span></span>
+							<div class="mui-media-body">撤回</div>
+						</a>
+					</li>
+
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" class="indexclass" data-id="99">
+							<span style="color: #1296db;" class="mui-icon iconfont icon-yuyuejiuzhen"><span class="mui-badge" ID="sp_yy" style="background-color: #007aff">0</span></span>
+							<div class="mui-media-body">预约</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="caselist_mian.html" data-id="200" class="indexclass">
+							<span style="color: #1296db;" class=" mui-icon mui-icon mui-icon-chat"><span class="mui-badge" ID="sp_cc" style="background-color: #007aff">0</span></span>
+							<div class="mui-media-body">留言</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" data-id="201" class="indexclass">
+							<span style="color: #1296db;" class="mui-icon iconfont icon-ziyuantongji"></span>
+							<div class="mui-media-body">统计</div>
+						</a>
+					</li>
+				
+				</ul>
+				
+			</div>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="hos-js/common.js"></script>
+		<script type="text/javascript" src="hos-js/index_sub.js" ></script>
+	
+	</body>
+
+</html>

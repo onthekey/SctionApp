@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>KFBIO病理远程会诊平台</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/iconfont.css" />
+	</head>
+
+	<body style="background: #FFFFFF;">
+
+		<header class="mui-bar mui-bar-nav" style="background-color:#3188DE; ">
+			<h1 id="index-title" class="mui-title" style="color: white;"></h1>
+		</header>
+		
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js"></script>
+	<script>
+		// 修改index页显示主题
+		var centerName = localStorage.centerName;
+		var title = centerName ? centerName : 'KFBIO病理远程会诊平台';
+		document.getElementById("index-title").innerHTML = title;
+		
+		
+		mui.init({
+			gestureConfig:{
+				doubletap:true
+			},
+			subpages:[{
+				url:'index_sub.html',
+				id:'index_sub.html',
+				styles:{
+					top: '45px',
+					bottom: '0px',
+				}
+			}]
+		});
+		
+		function Number() {
+			console.log("show");
+			var contentWebview;
+			if(navigator.userAgent.indexOf("Html5Plus") < 0) { //不支持5+ API
+				//window.frames["index_sub.html"].close();
+			} else { //支持5+ API
+				if(contentWebview == null) {
+					contentWebview = plus.webview.currentWebview().children()[0];
+				}
+				contentWebview.evalJS("windowLoad()");
+
+				}
+		}
+		
+	</script>
+</html>

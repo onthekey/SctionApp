@@ -1,0 +1,739 @@
+{
+	"login.html": {
+		"resources": [
+			"js/app.js",
+			"js/common.js",
+			"js/jquery.json.min.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/style.css",
+			"js/mui.enterfocus.js",
+			"js/md5.js",
+			"fonts/mui.ttf",
+			"css/login.css",
+			"images/l.png",
+			"images/logo.png",
+			"images/1.jpg",
+			"images/m.png",
+			"js/mui.picker.min.js",
+			"css/mui.picker.min.css"
+		],
+		"refer": [
+			"index.html",
+			"Hospital/index.html",
+			"Distribution/index.html"
+		]
+	},
+	"index.html": {
+		"resources": [
+			"css/iconfont.css",
+			"fonts/iconfont.ttf",
+			"images/head1.jpg",
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"index_sub.html",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"book_main.html",
+			"caselist_main.html",
+			"setting.html",
+			"statistics.html",
+			"index_sub.html"
+		]
+	},
+	"book_sub.html": {
+		"resources": [
+			"js/mui.picker.min.js",
+			"css/mui.picker.min.css",
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/mystyle.css",
+			"js/mui.poppicker.js"
+		],
+		"refer": [
+			"index.html",
+			"book_info.html"
+		]
+	},
+	"book_main.html": {
+		"resources": [
+			"book_sub.html",
+			"css/mystyle.css",
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"text_sub.html"
+		],
+		"refer": [
+			"book_sub.html",
+			"text_sub.html"
+		]
+	},
+	"caselist_main.html": {
+		"resources": [
+			"caselist_sub.html",
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/mystyle.css",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"caselist_sub.html"
+		]
+	},
+	"setting.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"js/md5.js",
+			"js/mui.view.js",
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"login.html"
+		]
+	},
+	"caselist_sub.html": {
+		"resources": [
+			"js/mui.picker.min.js",
+			"fonts/mui.ttf",
+			"css/mui.picker.min.css",
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/mui.poppicker.js"
+		],
+		"refer": [
+			"caseinfo.html"
+		]
+	},
+	"statistics.html": {
+		"resources": [
+			"js/common.js",
+			"js/mui.picker.min.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/mui.picker.min.css"
+		],
+		"refer": []
+	},
+	"caseinfo.html": {
+		"resources": [
+			"images/60x60.gif",
+			"js/mui.lazyload.js",
+			"js/mui.lazyload.img.js",
+			"css/mystyle.css",
+			"images/HisLogo.png",
+			"images/annex.png",
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"invited.html",
+			"slideviewer.html",
+			"report.html",
+			"pdfviewer.html",
+			"slideviewer2.html",
+			"review.html",
+			"returncase.html",
+			"picviewer.html"
+		]
+	},
+	"report.html": {
+		"resources": [
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"js/common.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"review.html"
+		]
+	},
+	"index_sub.html": {
+		"resources": [
+			"images/slider1.jpg",
+			"fonts/iconfont.ttf",
+			"images/slider3.jpg",
+			"images/slider2.jpg",
+			"images/slider4.jpg",
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"css/iconfont.css",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"caselist_main.html",
+			"setting.html",
+			"statistics.html",
+			"book_main.html"
+		]
+	},
+	"book_info.html": {
+		"resources": [
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/mystyle.css"
+		],
+		"refer": []
+	},
+	"invited.html": {
+		"resources": [
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"review.html": {
+		"resources": [
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"slideviewer.html": {
+		"resources": [
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"returncase.html": {
+		"resources": [
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"Hospital/index_sub.html": {
+		"resources": [
+			"images/slider1.jpg",
+			"css/iconfont.css",
+			"fonts/iconfont.ttf",
+			"images/slider3.jpg",
+			"images/slider4.jpg",
+			"images/slider2.jpg",
+			"fonts/mui.ttf",
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"Hospital/hos-js/common.js",
+			"Hospital/hos-js/index_sub.js",
+			"images/HisLogo.png",
+			"Hospital/hos-css/index_sub.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"Hospital/setting.html",
+			"Hospital/message_case_main.html",
+			"Hospital/caselist_main.html",
+			"Hospital/book_main.html",
+			"Hospital/statistics.html"
+		]
+	},
+	"Hospital/setting.html": {
+		"resources": [
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/md5.js",
+			"js/mui.view.js",
+			"Hospital/hos-js/setting.js",
+			"Hospital/hos-css/setting.css",
+			"Hospital/hos-js/common.js"
+		],
+		"refer": [
+			"login.html"
+		]
+	},
+	"Hospital/index.html": {
+		"resources": [
+			"Hospital/index_sub.html",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"Hospital/hos-js/index.js",
+			"js/jquery-1.11.0.js",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"Hospital/index_sub.html"
+		]
+	},
+	"Distribution/index.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"css/iconfont.css",
+			"Distribution/index_sub.html",
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"fonts/iconfont.ttf",
+			"Distribution/Controller/distributionApi.js",
+			"Distribution/Controller/const.js"
+		],
+		"refer": [
+			"Distribution/index_sub.html"
+		]
+	},
+	"Distribution/index_sub.html": {
+		"resources": [
+			"images/slider1.jpg",
+			"css/newfont.css",
+			"fonts/iconfont.ttf",
+			"images/slider3.jpg",
+			"fonts/newiconfont.ttf",
+			"images/slider4.jpg",
+			"images/slider2.jpg",
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"css/iconfont.css",
+			"css/mui.min.css",
+			"Distribution/Controller/index_sub_controller.js",
+			"Distribution/Controller/const.js",
+			"Distribution/Controller/UtilHelper.js",
+			"Distribution/Controller/distributionApi.js",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"Distribution/setting.html",
+			"Distribution/caselist_main.html",
+			"Distribution/book_main.html",
+			"Distribution/Triage.html",
+			"Distribution/reservation.html",
+			"Distribution/referral.html",
+			"setting.html",
+			"Distribution/statistics.html",
+			"statistics.html"
+		]
+	},
+	"Distribution/setting.html": {
+		"resources": [
+			"js/mui.view.js",
+			"fonts/mui.ttf",
+			"js/md5.js"
+		],
+		"refer": []
+	},
+	"Distribution/caselist_sub.html": {
+		"resources": [
+			"js/mui.poppicker.js",
+			"css/mui.picker.min.css",
+			"js/mui.picker.min.js",
+			"css/newfont.css"
+		],
+		"refer": []
+	},
+	"Distribution/caselist_main.html": {
+		"resources": [
+			"Distribution/caselist_sub.html",
+			"fonts/mui.ttf",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"Distribution/caselist_sub.html"
+		]
+	},
+	"Distribution/book_main.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"css/mystyle.css"
+		],
+		"refer": []
+	},
+	"Distribution/Triage.html": {
+		"resources": [
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"Distribution/TriageList.html",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"Distribution/Controller/UrlUtils.js",
+			"Distribution/Controller/Triage_controller.js",
+			"Distribution/Controller/const.js",
+			"Distribution/Controller/UtilHelper.js",
+			"Distribution/Controller/distributionApi.js"
+		],
+		"refer": [
+			"Distribution/TriageList.html",
+			"Distribution/caselist_sub.html"
+		]
+	},
+	"Distribution/TriageList.html": {
+		"resources": [
+			"js/common.js",
+			"js/mui.picker.min.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"js/mui.poppicker.js",
+			"css/newfont.css",
+			"css/mui.min.css",
+			"css/mui.picker.min.css",
+			"Distribution/style/TriageList.css",
+			"Distribution/Controller/TriageList_controller.js",
+			"Distribution/Controller/const.js",
+			"fonts/mui.ttf",
+			"Distribution/Controller/UrlUtils.js",
+			"Distribution/Controller/UtilHelper.js",
+			"Distribution/lifecycle/TriageList_lifecycle.js",
+			"Distribution/Controller/distributionApi.js",
+			"Distribution/lifecycle/lifecycle_constant.js",
+			"Distribution/iPadController/TriageList_ipad_controller.js"
+		],
+		"refer": [
+			"Distribution/diagnosisDetails.html",
+			"Distribution/reservationDetails.html"
+		]
+	},
+	"Distribution/reservation.html": {
+		"resources": [
+			"Distribution/Controller/reservation_controller.js",
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"Distribution/Controller/UtilHelper.js",
+			"Distribution/Controller/const.js",
+			"Distribution/reservationList.html",
+			"Distribution/Controller/distributionApi.js"
+		],
+		"refer": [
+			"Distribution/reservationList.html"
+		]
+	},
+	"Distribution/reservationList.html": {
+		"resources": [
+			"Distribution/Controller/reservationList_controller.js",
+			"js/common.js",
+			"js/mui.picker.min.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"js/mui.poppicker.js",
+			"Distribution/Controller/UtilHelper.js",
+			"Distribution/Controller/const.js",
+			"Distribution/style/TriageList.css",
+			"fonts/mui.ttf",
+			"css/newfont.css",
+			"css/mui.min.css",
+			"css/mui.picker.min.css",
+			"Distribution/base/css/mui.min.css",
+			"Distribution/base/css/mui.picker.min.css",
+			"Distribution/base/css/newfont.css",
+			"Distribution/lifecycle/reservationList_lifecycle.js",
+			"Distribution/lifecycle/lifecycle_constant.js",
+			"Distribution/Controller/distributionApi.js",
+			"Distribution/iPadController/reservationList_ipad_controller.js"
+		],
+		"refer": [
+			"Distribution/reservationDetails.html"
+		]
+	},
+	"Distribution/referral.html": {
+		"resources": [
+			"Distribution/Controller/referral_controller.js",
+			"fonts/mui.ttf",
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"Distribution/Controller/UtilHelper.js",
+			"Distribution/Controller/const.js",
+			"Distribution/reservationList.html",
+			"Distribution/referralList.html",
+			"Distribution/Controller/distributionApi.js"
+		],
+		"refer": [
+			"Distribution/reservationList.html",
+			"Distribution/referralList.html"
+		]
+	},
+	"Distribution/referralList.html": {
+		"resources": [
+			"js/mui.picker.min.js",
+			"Distribution/style/TriageList.css",
+			"js/mui.poppicker.js",
+			"css/mui.picker.min.css",
+			"Distribution/Controller/reservationList_controller.js",
+			"Distribution/base/css/newfont.css",
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"Distribution/Controller/UtilHelper.js",
+			"Distribution/Controller/const.js",
+			"Distribution/Controller/referralList_controller.js.js"
+		],
+		"refer": []
+	},
+	"Distribution/statistics.html": {
+		"resources": [
+			"js/common.js",
+			"js/mui.picker.min.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"Distribution/Controller/UtilHelper.js",
+			"Distribution/Controller/const.js",
+			"css/mui.picker.min.css",
+			"Distribution/Controller/statistics_controller.js",
+			"js/mui.lazyload.js",
+			"js/mui.lazyload.img.js",
+			"fonts/mui.ttf",
+			"Distribution/Controller/distributionApi.js",
+			"Distribution/style/statistics.css"
+		],
+		"refer": []
+	},
+	"Distribution/diagnosisDetails.html": {
+		"resources": [
+			"css/mui.min.css",
+			"js/mui.lazyload.js",
+			"css/mystyle.css",
+			"js/mui.lazyload.img.js",
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"Distribution/style/diagnosisDetails.css",
+			"Distribution/Controller/diagnosisDetails_controller.js",
+			"Distribution/Controller/UtilHelper.js",
+			"Distribution/Controller/const.js",
+			"Distribution/Controller/distributionApi.js",
+			"images/60x60.gif",
+			"Distribution/Controller/expertList_view.js",
+			"Distribution/widget/expertList_view.css",
+			"Distribution/widget/expertList_view.js",
+			"Distribution/base/iconfont/material-icons.css",
+			"Distribution/base/iconfont/MaterialIcons-Regular.woff2",
+			"images/HisLogo.png",
+			"Distribution/Controller/expertList.js",
+			"js/mui.picker.min.js",
+			"css/mui.picker.min.css",
+			"Distribution/lifecycle/diagnosisDetails_lifecycle.js",
+			"Distribution/lifecycle/lifecycle_constant.js"
+		],
+		"refer": [
+			"Distribution/returnCase.html",
+			"slideviewer2.html",
+			"slideviewer.html",
+			"picviewer.html"
+		]
+	},
+	"Distribution/reservationDetails.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/mystyle.css",
+			"Distribution/style/reservationDetails.css",
+			"Distribution/Controller/reservationDetails_controller.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"Distribution/Controller/UtilHelper.js",
+			"Distribution/Controller/const.js",
+			"Distribution/Controller/distributionApi.js",
+			"Distribution/base/iconfont/material-icons.css",
+			"Distribution/base/iconfont/MaterialIcons-Regular.woff2",
+			"Distribution/Controller/expertList_view.js",
+			"Distribution/widget/expertList_view.css",
+			"Distribution/widget/expertList_view.js",
+			"Distribution/Controller/expertList.js",
+			"Distribution/lifecycle/lifecycle_constant.js",
+			"Distribution/lifecycle/reservationDetails_lifecycle.js"
+		],
+		"refer": []
+	},
+	"Distribution/returnCase.html": {
+		"resources": [
+			"js/common.js",
+			"css/mui.min.css",
+			"Distribution/Controller/return_controller.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"Distribution/Controller/UtilHelper.js",
+			"Distribution/Controller/const.js",
+			"Distribution/Controller/distributionApi.js",
+			"Distribution/lifecycle/returnCase_lifecycle.js",
+			"Distribution/Controller/returnCase_controller.js",
+			"Distribution/lifecycle/lifecycle_constant.js"
+		],
+		"refer": []
+	},
+	"slideviewer2.html": {
+		"resources": [
+			"css/mui.min.css",
+			"js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js"
+		],
+		"refer": []
+	},
+	"Hospital/message_case_main.html": {
+		"resources": [
+			"Hospital/message_case_sub.html",
+			"Hospital/hos-js/message_case_main.js",
+			"css/mui.min.css",
+			"Hospital/hos-js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js"
+		],
+		"refer": [
+			"Hospital/message_case_sub.html"
+		]
+	},
+	"Hospital/message_case_sub.html": {
+		"resources": [
+			"Hospital/hos-css/message_case_sub.css",
+			"js/mui.poppicker.js",
+			"css/mui.picker.min.css",
+			"Hospital/hos-js/message_case_sub.js",
+			"css/mui.min.css",
+			"js/mui.picker.min.js"
+		],
+		"refer": [
+			"Hospital/message_details.html"
+		]
+	},
+	"Hospital/caselist_sub.html": {
+		"resources": [
+			"js/mui.poppicker.js",
+			"Hospital/hos-js/caselist_sub.js",
+			"css/mui.picker.min.css",
+			"Hospital/hos-css/caselist_sub.css",
+			"css/mui.min.css",
+			"js/mui.picker.min.js"
+		],
+		"refer": [
+			"Hospital/caseinfo.html"
+		]
+	},
+	"Hospital/caselist_main.html": {
+		"resources": [
+			"Hospital/caselist_sub.html",
+			"css/mui.min.css",
+			"Hospital/hos-js/caselist_main.js",
+			"Hospital/hos-js/common.js",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js"
+		],
+		"refer": [
+			"Hospital/caselist_sub.html"
+		]
+	},
+	"Hospital/caseinfo.html": {
+		"resources": [
+			"Hospital/hos-css/caseinfo.css",
+			"css/mui.min.css",
+			"Hospital/hos-js/caseinfo.js",
+			"js/mui.lazyload.js",
+			"css/mystyle.css",
+			"js/mui.lazyload.img.js",
+			"images/user-photo.png"
+		],
+		"refer": [
+			"slideviewer2.html",
+			"slideviewer.html",
+			"picviewer.html"
+		]
+	},
+	"Hospital/message_details.html": {
+		"resources": [
+			"Hospital/hos-css/message_details.css",
+			"js/mui.lazyload.js",
+			"css/mystyle.css",
+			"images/user-photo.png",
+			"Hospital/hos-js/message_details.js",
+			"js/mui.lazyload.img.js",
+			"css/mui.min.css"
+		]
+	},
+	"picviewer.html": {
+		"resources": [
+			"js/common.js",
+			"css/mui.min.css",
+			"js/jquery-1.11.0.js",
+			"js/mui.min.js"
+		]
+	},
+	"Hospital/book_main.html": {
+		"resources": [
+			"Hospital/hos-js/book_main_hospital.js",
+			"css/mystyle.css",
+			"Hospital/book_sub.html",
+			"Hospital/hos-css/book_main_hospital.css",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"Hospital/book_sub.html"
+		]
+	},
+	"Hospital/book_sub.html": {
+		"resources": [
+			"Hospital/hos-js/book_sub_hospital.js",
+			"Hospital/hos-css/book_sub_hospital.css",
+			"css/mui.picker.min.css"
+		],
+		"refer": [
+			"Hospital/book_info.html"
+		]
+	},
+	"Hospital/book_info.html": {
+		"resources": [
+			"Hospital/hos-css/book_info_hospital.css",
+			"Hospital/hos-js/book_info_hospital.js",
+			"css/iconfont.css",
+			"css/mui.min.css"
+		]
+	},
+	"Hospital/statistics.html": {
+		"resources": [
+			"css/newfont.css",
+			"Hospital/hos-js/statistics.js",
+			"fonts/newiconfont.ttf",
+			"Hospital/hos-css/statistics.css"
+		]
+	}
+}

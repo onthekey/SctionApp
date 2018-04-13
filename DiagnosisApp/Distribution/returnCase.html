@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<!--App自定义的css-->
+		<link href="../css/mystyle.css" />
+		<link href="../fonts/iconfont.css" rel="stylesheet">
+		
+		<link href="fonts/iconfont.css" rel="stylesheet">
+	</head>
+
+	<body style="height: 100%; background-color: white;">
+		<header class="mui-bar mui-bar-nav" style="background-color:#3188DE; ">
+			<a style="color: white;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"> </a>
+			<h1 class="mui-title" style="color: white;">退回病例</h1>
+		</header>
+		<div class="mui-content" style="background-color: white;">
+			<div id="slider" class="mui-slider">
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item" href="#returnReason">
+						退回理由
+					</a>
+					<a class="mui-control-item" href="#returnHistory">
+						历史退回理由
+					</a>
+				</div>
+				
+				<div id="sliderProgressBar" class="mui-slider-progress-bar" style="width: 50%;"></div>
+				<div class="mui-slider-group" style="height: 500px;">
+					<!-- 退回界面 -->
+					<div id="returnReason" class="mui-slider-item mui-control-content mui-active" style="border: none;">
+						<div id="scroll1" class="mui-scroll-wrapper" style="height: auto;">
+							<form class="mui-input-group" id="Returnlist">
+								<div class="mui-loading">
+									<div class="mui-spinner">
+									</div>
+								</div>
+							</form>
+							<div class="mui-input-row" style="margin: 2px 2px;">
+								<textarea id="returnExplanation" rows="3" placeholder="退回理由" maxlength="150" placeholder="退回理由有150字的长度限制"></textarea>
+							</div>
+							<div align="center" >
+								<button id="btn_return" style="background-color: #3188DE;color: white;">
+									确认退回
+								</button>
+							</div>
+						</div>
+					</div>
+					
+					<!-- 历史退回理由 -->
+					<div id="returnHistory" class="mui-slider-item mui-control-content" style="border: none;">
+						<div id="scroll2" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<div class="mui-content">
+									<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed" id="returnHistoryList">
+										<div class="mui-loading">
+											<div class="mui-spinner">
+											</div>
+										</div>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div>
+			<script src="../js/mui.min.js"></script>
+			<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+			
+			<script type="text/javascript" src="Controller/distributionApi.js"></script>
+			
+			<script type="text/javascript" src="Controller/const.js"></script>
+			<script type="text/javascript" src="Controller/UtilHelper.js"></script>
+			
+			<script type="text/javascript" src="lifecycle/lifecycle_constant.js"></script>
+			<script type="text/javascript" src="lifecycle/returnCase_lifecycle.js"></script>
+			<script type="text/javascript" src="Controller/returnCase_controller.js"></script>
+	</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="css/mui.min.css">
+		<!--App自定义的css-->
+		<link href="css/mystyle.css" />
+		<link href="fonts/iconfont.css" />
+
+		<link href="fonts/iconfont.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav" style="background-color:#3188DE; ">
+			<a style="color: white;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"> </a>
+			<h1 class="mui-title" style="color: white;">退回病例</h1>
+
+		</header>
+		<div class="mui-content" style="background-color: white">
+			<div id="slider" class="mui-slider ">
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item" href="#item1mobile">
+						退回理由
+					</a>
+					<a class="mui-control-item" href="#item2mobile">
+						历史退回理由
+					</a>
+
+				</div>
+				<div id="sliderProgressBar" class="mui-slider-progress-bar" style="width: 50%;"></div>
+				<div class="mui-slider-group" style="height: 1000px;">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper" style="height: auto;">
+							<form class="mui-input-group" id="Returnlist">
+								<div class="mui-loading">
+									<div class="mui-spinner">
+									</div>
+								</div>
+
+							</form>
+							<div class="mui-input-row" style="margin: 2px 2px;">
+								<textarea id="returnres" rows="3" placeholder="退回理由" maxlength="150" placeholder="退回理由有150字的长度限制"></textarea>
+							</div>
+							<div align="center" style="margin-top: -8px;"><button id="confirmBtn">确认退回</button></div>
+						</div>
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div id="scroll2" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+
+								<div class="mui-content">
+									<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed" id="ReturnHoslist">
+										<div class="mui-loading">
+											<div class="mui-spinner">
+											</div>
+										</div>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div>
+
+			<script src="js/mui.min.js"></script>
+			<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+			<script type="text/javascript" src="js/common.js"></script>
+			<script>
+				mui.init({
+					swipeBack: true //启用右滑关闭功能
+				});
+				var deceleration = mui.os.ios ? 0.003 : 0.0009;
+				mui('#scroll1').scroll({
+					bounce: false,
+					indicators: true, //是否显示滚动条
+					deceleration: deceleration
+				});
+				mui.ready(function() {
+
+					GetReturnInfo();
+					GetHistoryReturnInfo();
+				});
+				var Returndata = [
+					'<div class="mui-input-row mui-radio mui-left">',
+					'<label>@name</label>',
+					'<input name="Returnradio" type="radio" value="@itemid">',
+					'</div>'
+				]
+				var ReturnInfodata = [
+					'<li class="mui-table-view-cell">',
+					'<div class="mui-table">',
+					'<div class="mui-table-cell mui-col-xs-10">',
+					'	<h4 class="mui-ellipsis">@Reason</h4>',
+					'<h5>时间：@ReturnTime</h5>',
+					'<p class="mui-h6 mui-ellipsis">理由：@Expain</p>',
+					'</div>',
+
+					'</div>',
+					'</li>'
+				]
+
+				function GetReturnInfo() {
+
+					jQuery.ajax(resturl + 'GetReturnInfo', {
+						data: {
+
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						cache: false,
+						success: function(data) {
+							var div = "";
+							data = eval(data);
+							if(data.length > 0) {
+								for(var i = 0; i < data.length; i++) {
+
+									div += Returndata.join('').replace(/@name/, data[i].Reason)
+										.replace(/@itemid/, data[i].ID)
+
+								}
+								jQuery('#Returnlist').html(div);
+							}
+						}
+					});
+
+				}
+
+				function GetHistoryReturnInfo() {
+					var userInfo = localStorage.getItem("userInfo");
+					var user = userInfo ? window.eval("(" + userInfo + ")") : "";
+					jQuery.ajax(resturl + 'GetHistoryReturnInfo', {
+						data: {
+							ConsultID: getQueryString2("ConsultID"),
+							UserID: user.userid
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						cache: false,
+						success: function(data) {
+							var div = "";
+							data = eval(data);
+							if(data.length > 0) {
+								for(var i = 0; i < data.length; i++) {
+
+									div += ReturnInfodata.join('').replace(/@Reason/, data[i].ReasonInfo)
+										.replace(/@ReturnTime/, data[i].ReturnTime)
+										.replace(/@Expain/, data[i].Expain)
+
+								}
+								jQuery('#ReturnHoslist').html(div);
+							} else {
+
+								jQuery('#ReturnHoslist').html("<div align=\"center\"><p>暂无历史记录</p></div>");
+							}
+						}
+					});
+
+				}
+				document.getElementById("confirmBtn").addEventListener('tap', function() {
+					//判定是否已选择专家，if null break
+					var invitedID = jQuery('input:radio[name="Returnradio"]:checked').val();
+					if(invitedID == "" || invitedID == undefined) {
+						mui.toast("请选择理由");
+					} else {
+						var btnArray = ['否', '是'];
+						mui.confirm('确定退回这个病例吗？', '提示', btnArray, function(e) {
+							if(e.index == 1) {
+								var id = jQuery('input:radio[name="Returnradio"]:checked').val();
+								var v = jQuery('#returnres').val();
+
+								if(id != "" && id != undefined) {
+									plus.nativeUI.showWaiting("病例退回中");
+
+									var userInfo = localStorage.getItem("userInfo");
+									var user = userInfo ? window.eval("(" + userInfo + ")") : "";
+									jQuery.ajax(resturl + 'ReturnCase', {
+										data: JSON.stringify({
+											ConsultID: getQueryString2("ConsultID"),
+											Reason: id,
+											Expain: v,
+											UserID: user.userid
+
+										}),
+										dataType: 'json', //服务器返回json格式数据
+										type: 'post', //HTTP请求类型
+										timeout: 10000, //超时时间设置为10秒；
+										cache: false,
+										success: function(data) {
+											data = eval(data);
+											if(data == "1") {
+												if(navigator.userAgent.indexOf("Html5Plus") < 0) { //不支持5+ API
+													jump("caselist_main.html?type=" + getQueryString2("type"), 'caselist', {
+
+													});
+												} else { //支持5+ API
+													plus.webview.getWebviewById("index.html").evalJS("getNumber()");
+													plus.webview.close("caseinfo.html")
+													if(!mui.os.android) {
+														if(mui.os.iphone) {
+															plus.webview.getWebviewById("caselist").evalJS("refresh()");
+														} else {
+															plus.webview.getWebviewById("caselist").evalJS("refreshData()");
+															plus.webview.getWebviewById("index.html").evalJS("getNumber()");
+														}
+													} else {
+														plus.webview.getWebviewById("caselist").evalJS("refresh()");
+													}
+													// 原生UI添加
+													plus.nativeUI.closeWaiting();
+													mui.back();
+												}
+											}
+										},
+										error: function(xhr, type, errorThrown) {
+											if(type == 'timeout') {
+												// 原生UI添加
+												plus.nativeUI.closeWaiting();
+												mui.toast("网络不给力，请重新操作！");
+
+											}
+										}
+									});
+								} else {
+
+									mui.toast("请先选择退回理由");
+								}
+
+							} else {
+
+							}
+						})
+					}
+
+				});
+			</script>
+	</body>
+
+</html>

@@ -1,0 +1,775 @@
+`
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--<link rel="stylesheet" href="css/mystyle.css">-->
+		<link rel="stylesheet" href="css/mui.min.css">
+
+		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" />
+
+		<style>
+			/*跨webview需要手动指定位置*/
+			
+			.mui-plus header.mui-bar {
+				display: none!important;
+			}
+			
+			.mui-plus .mui-bar-nav~.mui-content {
+				padding: 0!important;
+			}
+			
+			.mui-plus .plus {
+				display: inline;
+			}
+			
+			.plus {
+				display: none;
+			}
+			
+			#topPopover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+			}
+			
+			#topPopover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			
+			p {
+				text-indent: 22px;
+			}
+			
+			span.mui-icon {
+				font-size: 14px;
+				color: #007aff;
+				margin-left: -15px;
+				padding-right: 10px;
+			}
+			
+			.mui-popover {
+				height: 230px
+			}
+			
+			.mui-btn {
+				font-size: 16px;
+				padding: 4px;
+				margin: 3px;
+			}
+			
+			#popover3 {
+				min-width: 282px;
+				height: 250px;
+				top: 50% !important;
+				margin-top: -150px;
+				left: 50% !important;
+				margin-left: -141px;
+			}
+			
+			@media (min-width: 400px) {
+				#popover3 {}
+			}
+			
+			#popover3 .mui-popover-arrow {
+				display: none !important;
+			}
+			
+			#popover3 .operate {
+				text-align: center;
+				margin-top: 20px
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<input type="hidden" id="hidden_siteid" />
+		<input type="hidden" id="hidden_consultStatus" value="" />
+		<input type="hidden" id="hidden_caseStatus" value="" />
+		<input type="hidden" id="hidden_invt" value="" />
+
+		<input type="hidden" id="hidden_keyword" value="" />
+		<input type="hidden" id="hidden_startTime" value="" />
+		<input type="hidden" id="hidden_endTime" value="" />
+
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style=" position: absolute; top: 0px; width: 100%; z-index: 99;">
+
+			<div class="mui-scroll">
+				<div>
+					<table style="width:100%; background: white; height: 40px;" id="tb_hz">
+						<tr>
+							<td>
+								<a id="sitetitle" href="#topPopover" class="mui-btn  mui-btn-link mui-btn-block mui-btn-outlined mui-icon mui-icon-arrowdown mui-right" style="padding: 0px; margin: 0px;  border：0px;height: 30px;line-height: 30px;">全部医院</a>
+							</td>
+							<td>
+								<a id="consulttitle" href="#topPopover2" class="mui-btn mui-btn-link  mui-btn-block mui-btn-outlined mui-icon mui-icon-arrowdown mui-right" style="padding: 0px; margin: 0px; height:  30px; line-height: 30px; padding-right: 4px;">全部状态</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<!--数据列表-->
+				<ul class="mui-table-view mui-table-view-chevron" id="xlistt">
+
+				</ul>
+				<div id="div_loading" align="center" style="display: none;">
+					<div class="mui-pull-loading mui-icon mui-spinner mui-visibility"></div>
+					<div class="mui-pull-caption mui-pull-caption-refresh" style="font-weight: 700;color: #777;">正在加载...</div>
+				</div>
+				<!-- 当p添加relative时脱离文档导致出现左右滑动现象 -->
+				<!--<p id="p_nomore" style="position:relative; bottom: 0px; z-index: 1; left: 50%; margin-left:-80px; display:none; color: #777;font-weight: 700;">没有更多会诊信息</p>-->
+				<div style="text-align: center; width: 100%; left: 50%; margin-left:-10px">
+					<p id="p_nomore" style="bottom: 0px; z-index: 1; display:none; color: #777;font-weight: 700;">没有更多预约信息</p>
+				</div>
+			</div>
+		</div>
+
+		<div id="div_head" class="mui-bar mui-bar-nav" style="background-color:#3188DE; display: none;  ">
+
+			<h1 id="headertitle" class="mui-title" style="color: white;">预约列表</h1>
+			<div onclick="showdiag()" style="font-size: 22px; color: white;" class="mui-icon mui-action-menu mui-icon-search mui-pull-right"></div>
+		</div>
+
+		<div id="topPopover" class="mui-popover" style="border-radius: 7px; height: 240px;">
+			<div class="mui-popover-arrow"></div>
+			<div id="hosList" class="mui-scroll-wrapper" style="height: 230px; overflow:hidden">
+				<div class="mui-scroll">
+					<ul class="mui-table-view" id="sitelist">
+
+					</ul>
+				</div>
+			</div>
+
+		</div>
+
+		<div id="topPopover2" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view" id="consultStatuslist">
+						<li class="mui-table-view-cell li_consult" data-id="">
+							<a href="#">全部状态</a>
+						</li>
+						<li class="mui-table-view-cell li_consult" data-id="99">
+							<a href="#">预约中</a>
+						</li>
+						<li class="mui-table-view-cell li_consult" data-id="100">
+							<a href="#">预约成功</a>
+						</li>
+						<li class="mui-table-view-cell li_consult" data-id="101">
+							<a href="#">预约退回</a>
+
+						</li>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div id="popover3" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-content-padded">
+				<h4 id="title" style="text-align: center;margin-top: 10px;">查询</h4>
+				<div class="mui-input-row">
+					<input id="txt_keyword" type="text" class="mui-input-clear" placeholder="患者姓名" style="font-size: 16px;padding: 4px;margin: 3px; width: 98%; height: 32px;">
+				</div>
+				<h5 class="mui-content-padded">申请时间：</h5>
+				<button id="btn_starttime" style="width: 98%;" data-options='{"type":"date"}' class="btn mui-btn mui-btn-block">请选择开始时间</button>
+				<button id="btn_endtime" style="width: 98%;" data-options='{"type":"date"}' class="btn mui-btn mui-btn-block">请选择结束时间</button>
+				<!--<button type="button" onclick="btnselectdata()" class="mui-btn mui-btn-primary mui-btn-block" style="margin-top:10px; width: 98%; ">确定</button>-->
+				<div style="margin-top:10px; margin-right: 1px; width: 49%; float: left">
+					<button type="button" onclick="btnselectdata()" class="mui-btn mui-btn-primary mui-btn-block" style="">确定</button>
+				</div>
+				<div style="margin-top:10px; margin-left: 1px; width: 49%; float: left">
+					<button type="button" onclick="clearselectdata()" class="mui-btn mui-btn-primary mui-btn-block" style="">清空</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/mui.min.js "></script>
+		<script src="js/mui.picker.min.js "></script>
+
+		<script src="js/mui.poppicker.js"></script>
+		<script src="js/jquery-1.11.0.js " type="text/javascript " charset="utf-8 "></script>
+		<script type="text/javascript " src="js/common.js "></script>
+
+		<script>
+			var title = null;
+
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh,
+						contentnomore: '没有更多预约信息'
+					}
+				}
+			});
+
+			function InitPage() {
+				if(getQueryString2("ipad") == "1") {
+					jQuery("#div_head").css("display", "");
+					//if(mui.os.plus){
+					jQuery("#pullrefresh").css("margin-top", "44px");
+					//}
+				}
+			}
+			InitPage();
+
+			var pageindex = 0;
+			var totalCount = 0;
+			var totalPageCount = 0;
+			var code = [
+				'<li class="mui-table-view-cell mui-media ">',
+				'<a class="mui-navigate-right case"  data-id="@ConsultID" data-Statusid="@ConsultStatusID">',
+				'<div class="mui-badge mui-badge-warning" style="padding-top:6px;padding-bottom:6px;position: relative; left: 0px; top: 50px; margin-right: 5px ; font-size: 30px; float:left; " >冰</div>',
+				'<div class="mui-media-body" style="margin-top:8px;">',
+				'<p class="mui-ellipsis" style=\"text-indent:0px;\">@caseinfo</p>',
+				'<p class="mui-ellipsis" style=\"text-indent:0px;\">部位：@OperationPart</p>',
+				'<p class="mui-ellipsis" style=\"text-indent:0px;\">时间：@BookTime</p>',
+				'<p class="mui-ellipsis" style=\"text-indent:0px\">来自@HisName</p>',
+				'</div>',
+
+				'<div class="mui-badge mui-badge-warning" style="top:10px;margin-right: -35px; ">@ConsultTime</div>',
+				'<div class="mui-badge mui-badge-warning" style="top: 95px; margin-right: -25px;" >@xxstatus</div>',
+
+				'</a>',
+				'</li>'
+			];
+			var sitemode = [
+				'<li class="mui-table-view-cell lisiteid" data-id="@HisID">',
+				'<a href="#">@sitename</a>',
+				'</li>'
+			]
+			var _error = null;
+			var wating = null;
+			var pagesize = 10;
+			var pageindex = 0;
+
+			// 初始化标志
+			var isInitialize = true;
+
+			//查询数据
+			function selectData(_pageindex, isup) {
+				
+				// ipad端左侧导航刷新
+				if(mui.os.ipad) {
+					//plus.webview.getWebviewById("index.html").evalJS("fresh()");
+				}
+				
+				
+				//向缓冲区中放入数据
+				jQuery("#hidden_startTime").val(jQuery("#btn_starttime").val());
+				jQuery("#hidden_endTime").val(jQuery("#btn_endtime").val());
+				jQuery("#hidden_keyword").val(jQuery("#txt_keyword").val());
+
+				jQuery('#p_nomore').css("display", "none");
+				var userInfo = localStorage.getItem("userInfo");
+				var user = userInfo ? window.eval("( " + userInfo + ") ") : " ";
+
+				//下拉是重置页码
+				if(!isup) {
+					pageindex = 0;
+				}
+
+				var StarPage = _pageindex * pagesize + 1;
+				var EndPage = (_pageindex + 1) * pagesize;
+				jQuery.ajax(resturl + 'Book', {
+					data: {
+						StarPage: StarPage,
+						EndPage: EndPage,
+						HisID: jQuery("#hidden_siteid").val(),
+						UserID: user.userid,
+						ConsultStatusID: jQuery("#hidden_consultStatus").val(),
+						keyword: jQuery("#txt_keyword").val(),
+						sdate: jQuery("#btn_starttime").val(),
+						edate: jQuery("#btn_endtime").val()
+
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					cache: false,
+					success: function(data) {
+						data = eval(data);
+						//如果是下拉
+						if(!isup) {
+							jQuery('#wrapper-data').html('');
+						}
+						var div = " ";
+						if(data.length > 0) {
+
+							//console.log(data[0].pagecount);
+
+							if(isInitialize)
+								isInitialize = !isInitialize;
+							// 添加一个标题修改操作
+							if(!mui.os.ipad) {
+								plus.webview.getWebviewById("booklist").evalJS("changeHead(" + data[0].pagecount + ")");
+							} else {
+								changeTitle(data[0].pagecount);
+							}
+
+							for(var i = 0; i < data.length; i++) {
+								var status = "预约中";
+								var ConsultStatusID = data[i].ConsultStatusID
+								if(ConsultStatusID == "100")
+									status = "预约成功";
+								else if(ConsultStatusID == "101")
+									status = "退回";
+								var caseinfo = data[i].YuName + "- " + data[i].YuSex + "- " + data[i].YuAge
+								div += code.join('')
+									.replace(/@xxstatus/, status)
+									.replace(/@OperationPart/, data[i].OperationPart)
+									.replace(/@BookTime/, data[i].BookTime)
+									.replace(/@HisName/, data[i].HisName)
+									.replace(/@caseinfo/, caseinfo)
+									.replace(/@ConsultTime/, data[i].ConsultTime.replace('T', ' '))
+									.replace(/@ConsultID/, data[i].ConsultID)
+									.replace(/@ConsultStatusID/, data[i].ConsultStatusID)
+
+								totalPageCount = data[i].pagecount;
+							}
+
+							//如果是下拉
+							if(!isup) { // 下拉操作
+								console.log("下拉操作");
+								jQuery('#pullrefresh .mui-table-view').html(div);
+							} else { // 上滑操作
+								console.log("上滑操作");
+								jQuery('#pullrefresh .mui-table-view').append(div);
+							}
+
+							mui('#pullrefresh .mui-table-view').on('tap', '.case', function() {
+								var caseurl = 'book_info.html?ConsultID=' + this.getAttribute('data-id') +
+									"&ConsultStatusID=" + this.getAttribute("data-Statusid")
+								var ipad = getQueryString2("ipad");
+
+								if(ipad == "1") {
+
+									if(mui.os.plus) {
+										jump2(caseurl, 'bookinfo', {
+
+										});
+									} else {
+										window.location.href = caseurl;
+									}
+
+								} else {
+
+									jump(caseurl, 'bookinfo', {
+
+									});
+								}
+
+							});
+
+						} else {
+							if(isInitialize) {
+								// 初始化时不存在数据，显示为0
+								var sum = 0;
+								// 添加一个标题修改操作
+								if(!mui.os.ipad) {
+									plus.webview.getWebviewById("booklist").evalJS("changeHead(" + sum + ")");
+								} else {
+									changeTitle(sum);
+								}
+
+								isInitialize = !isInitialize;
+							} else {
+								// 查看是否时上滑操作，if true, 即已经没有可以再次加载的数据但依然有数据显示
+								// else false, 没有数据显示,设置显示case count为0
+								if(!isup) {
+									var sum = 0;
+									if(!mui.os.ipad) {
+										plus.webview.getWebviewById("booklist").evalJS("changeHead(" + sum + ")");
+									} else {
+										changeTitle(sum);
+									}
+								}
+							}
+
+							if(!isup) {
+								jQuery('#pullrefresh .mui-table-view').html(" ");
+								jQuery('#p_nomore').css("display", "");
+							}
+						}
+						jQuery("#div_loading").css("diaplay", "none");
+						if(!isup) {
+							if(init == "0") {
+								mui('#pullrefresh').pullRefresh().endPullupToRefresh();
+								mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+								console.log("初始化完成");
+								init = 1;
+							} else {
+								//停止下拉动画
+								console.log("初始化");
+								mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+								mui('#pullrefresh').pullRefresh().refresh(true);
+							}
+						} else {
+
+							//停止上拉动画
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(!(_pageindex * pagesize >= totalPageCount));
+							mui('#pullrefresh').pullRefresh().refresh(true);
+						}
+						console.log("reloading...");
+					},
+					error: function(xhr, type, errorThrown) {
+						if(!isup) {
+							//停止下拉动画
+							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+						} else {
+							//停止上拉动画
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(_pageindex * pagesize >= totalPageCount);
+						}
+						if(wating) {
+							wating.remove();
+						}
+						//超时处理
+						if(type == 'timeout') {
+							mui.toast("网络不给力，请重新操作！");
+						}
+					}
+				});
+				
+				// 刷新iPad端左侧
+				if(mui.os.ipad) {
+					plus.webview.getWebviewById("index.html").evalJS("getNumber()");
+				}
+			}
+			
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+					selectData(0, 0);
+					// mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 1500);
+			}
+			var init = 0;
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				setTimeout(function() {
+					if(init == 1) {
+						pageindex = pageindex + 1;
+						
+						console.log("当前需要载入的数据是:" + pageindex);
+						
+						selectData(pageindex, 1);
+					} else {
+						selectData(0, 0);
+
+					}
+
+					//mui('#pullrefresh').pullRefresh().endPullupToRefresh(pageindex>=totalPageCount); //参数为true代表没有更多数据了。
+
+				}, 1500);
+			}
+
+			if(mui.os.plus && getQueryString2("ipad") != "1") {
+				mui.plusReady(function() {
+					setTimeout(function() {
+						mui('#pullrefresh').pullRefresh().pullupLoading();
+					}, 1000);
+
+					LoadSite();
+					console.log("初始化, if true");
+				});
+			} else {
+
+				mui.ready(function() {
+
+					mui('#pullrefresh').pullRefresh().pullupLoading();
+
+					LoadSite();
+					console.log("初始化, if false");
+				});
+			}
+
+			mui('#consultStatuslist').on('tap', '.li_consult', function() {
+				var consultID = this.getAttribute('data-id');
+
+				jQuery('.mui-backdrop').removeClass('mui-active');
+				$('#consulttitle').text(this.innerText);
+				mui('#topPopover2').popover('hide');
+
+				jQuery("#hidden_consultStatus").val(consultID);
+				jQuery("#div_loading").css("diaplay", "");
+				selectData(0, 0);
+			});
+
+			function btnselectdata() {
+				jQuery("#div_loading").css("diaplay", "");
+				selectData(0, 0);
+				mui("#popover3").popover("toggle");
+			}
+
+			//清除筛选操作，清除所有相关的val与text
+			function clearselectdata() {
+				console.log("取消筛选");
+				//初始化所有选项
+				jQuery("#txt_keyword").val("");
+				jQuery("#hidden_keyword").val("");
+
+				jQuery("#btn_starttime").val("");
+				jQuery("#btn_starttime").text("请选择开始时间");
+				jQuery("#hidden_startTime").val("")
+
+				jQuery("#btn_endtime").val("");
+				jQuery("#btn_endtime").text("请选择结束时间");
+				jQuery("#hidden_endTime").val("");
+
+				/*jQuery("#showUserPicker").val("");
+				jQuery("#showUserPicker").text("全部类型");
+				jQuery("#hidden_caseStatus").val("");*/
+
+				//jQuery("#div_loading").css("diaplay", "");
+				selectData(0, 0);
+				//mui("#popover3").popover("toggle");
+			}
+
+			//加载站点
+			function LoadSite() {
+				var userInfo = localStorage.getItem("userInfo");
+				var user = userInfo ? window.eval("( " + userInfo + ") ") : " ";
+
+				jQuery.ajax(resturl + 'GetSiteByExp', {
+					data: {
+						UserID: user.userid
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					cache: false,
+					success: function(data) {
+						var div = " ";
+						data = eval(data);
+						if(data.length > 0) {
+							div += sitemode.join('').replace(/@sitename/, "全部医院")
+								.replace(/@HisID/, "0")
+							for(var i = 0; i < data.length; i++) {
+
+								div += sitemode.join('').replace(/@sitename/, data[i].HisName)
+									.replace(/@HisID/, data[i].HisID)
+
+							}
+							jQuery("#sitelist").html(div);
+							mui('#sitelist').on('tap', '.mui-table-view-cell', function() {
+								var HisID = this.getAttribute('data-id');
+
+								jQuery('.mui-backdrop').removeClass('mui-active');
+								$('#sitetitle').text(this.innerText);
+								mui('#topPopover').popover('hide');
+
+								jQuery("#hidden_siteid").val(HisID);
+								jQuery("#div_loading").css("diaplay", "");
+								selectData(0, 0);
+							});
+						}
+
+					},
+					error: function(xhr, type, errorThrown) {
+						if(type == 'timeout') {
+							mui.toast("网络不给力，请重新操作！");
+						}
+					}
+				});
+			}
+
+			if(!mui.os.android) {
+				// 当在android运行激活scroll时无法滚动
+				mui('#pullrefresh').scroll({});
+			}
+			mui('#hosList').scroll({});
+
+			//i 标志位标志search未打开还时关闭动作
+			/*var i = false;*/
+			function close() {
+				//var offCanvasWrapper = mui('#offCanvasWrapper');
+				//offCanvasWrapper.offCanvas('close');
+				mui("#popover3").popover("toggle");
+
+				// 关闭或打开popover的同时禁止或激活下拉刷新与上拉加载
+				/*i = !i;
+				pullRefreshToggle(i);*/
+			}
+
+
+			function showdiag() {
+				mui('#popover3').popover("toggle");
+			}
+
+			var picker;
+			(function($) {
+				$.init();
+				var result = $('#result')[0];
+				var btns = $('.btn');
+				btns.each(function(i, btn) {
+					btn.addEventListener('tap', function() {
+						var optionsJson = this.getAttribute('data-options') || '{}';
+						var options = JSON.parse(optionsJson);
+						var id = this.getAttribute('id');
+
+						if(!picker) {
+							/*
+							 * 首次显示时实例化组件
+							 * 示例为了简洁，将 options 放在了按钮的 dom 上
+							 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+							 */
+							picker = new $.DtPicker(options);
+							pickerShow();
+						} else {
+							pickerShow();
+						}
+
+						// Picker弹出事件与回调方法
+						function pickerShow() {
+							picker.show(function(rs) {
+								/*
+								 * rs.value 拼合后的 value
+								 * rs.text 拼合后的 text
+								 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+								 * rs.m 月，用法同年
+								 * rs.d 日，用法同年
+								 * rs.h 时，用法同年
+								 * rs.i 分（minutes 的第二个字母），用法同年
+								 */
+								jQuery("#" + id).val(rs.text);
+								jQuery("#" + id).text(rs.text);
+								/* 
+								 * 返回 false 可以阻止选择框的关闭
+								 * return false;
+								 */
+								/*
+								 * 释放组件资源，释放后将将不能再操作组件
+								 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+								 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+								 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+								 */
+								picker.dispose();
+								picker = null;
+							});
+						}
+					}, false);
+				});
+			})(mui);
+
+			$(function() {
+				// 数据缓冲区写回
+				$(document).on('tap', '.mui-backdrop', function() {
+					console.log("恢复缓冲区中的数据被触发");
+					// 查询字符串
+					if(jQuery("#hidden_keyword").val() != null && jQuery("#hidden_keyword").val() != "") {
+						jQuery("#txt_keyword").val(jQuery("#hidden_keyword").val());
+						jQuery("#txt_keyword").text(jQuery("#hidden_keyword").val());
+					} else {
+						jQuery("#txt_keyword").val("");
+						jQuery("#txt_keyword").text("");
+					}
+
+					// 查询开始时间
+					if(jQuery("#hidden_startTime").val() != null && jQuery("#hidden_startTime").val() != "") {
+						jQuery("#btn_starttime").val(jQuery("#hidden_startTime").val());
+						jQuery("#btn_starttime").text(jQuery("#hidden_startTime").val());
+					} else {
+						jQuery("#btn_starttime").val("");
+						jQuery("#btn_starttime").text("请选择开始时间");
+					}
+
+					// 查询结束时间
+					if(jQuery("#hidden_endTime").val() != null && jQuery("#hidden_endTime").val() != "") {
+						jQuery("#btn_endtime").val(jQuery("#hidden_endTime").val());
+						jQuery("#btn_endtime").text(jQuery("#hidden_endTime").val());
+					} else {
+						jQuery("#btn_endtime").val("");
+						jQuery("#btn_endtime").text("请选择结束时间");
+					}
+				});
+			});
+
+			/** 
+			 * 滑动禁止开关代码模块:开始
+			 */
+			// 禁止滑动数据加载开关
+			//var cancelToggle = false;
+
+			/*function pullRefreshToggle(cancelToggle) {
+				// 取反设置切换滑动操作的开关
+				// cancelToggle = !cancelToggle;
+				mui('#pullrefresh').pullRefresh().setStopped(cancelToggle);
+			}*/
+
+			// Android刷新bug修复模块(在存在PopMenu时能够进行滑动的bug)
+			var isActive = false;
+			if(mui.os.android) {
+				console.log("Android进入");
+				// 监听mui-backdrop是否存在, if true, 设置滑动更新操作为禁止
+				// 当 mui-backdrop 不存在时重新激活滑动操作
+				setInterval(function() {
+					if(jQuery(".mui-backdrop").hasClass("mui-active")) {
+						if(!isActive) {
+							mui('#pullrefresh').pullRefresh().setStopped(true);
+							isActive = !isActive;
+						}
+					} else {
+						if(isActive) {
+							mui('#pullrefresh').pullRefresh().setStopped(false);
+							isActive = !isActive;
+						}
+
+					}
+				}, 100);
+			}
+
+			// 点击禁止滑动, 医院选择, 全部状态, search
+			// 医院选择
+			/*mui('body').on('tap', '#sitetitle', function(e) {
+				pullRefreshToggle(true);
+			});*/
+
+			// 状态选择
+			/*mui('body').on('tap', '#consulttitle', function(e) {
+				pullRefreshToggle(true);
+			});*/
+
+			// 点击激活滑动事件, 确定按钮, 蒙版点击, listItem项
+
+			// 蒙版
+			// 点击非Dialog区, Dialog消失事件, 使滑动事件为true
+			// 只有在cancelToggle == true时需要解除禁止
+			/*mui('body').on('tap', '.mui-backdrop', function(e) {
+				pullRefreshToggle(false);
+			});	*/
+
+			function refreshData() {
+				console.log("内容刷新中");
+				selectData(0, 0);
+			}
+
+			function changeTitle(sum) {
+				var text;
+				if(title == null)
+					title = jQuery("#headertitle").text();
+				text = title;
+				text += "(" + sum + ")";
+				jQuery("#headertitle").text(text);
+			}
+		</script>
+	</body>
+
+</html>

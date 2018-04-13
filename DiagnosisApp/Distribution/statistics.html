@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/mui.picker.min.css" />
+
+		<link rel="stylesheet" href="style/statistics.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color:#3188DE; ">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+			<h1 id="reservation_details_title" class="mui-title" style="color: white;">统计</h1>
+			<div onclick="dialogShow()" style="font-size: 22px; color: white;" class="mui-icon mui-action-menu mui-icon-search mui-pull-right"></div>
+		</header>
+
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" style="background-color: white;">
+					<a class="mui-control-item" href="#consultationStatistics">
+						专家统计
+					</a>
+					<a class="mui-control-item" href="#siteStatistics">
+						站点统计
+					</a>
+				</div>
+				<div id="sliderProgressBar" class="mui-slider-progress-bar" style="width: 50%;"></div>
+				<div class="mui-slider-group">
+
+					<div id="consultationStatisticsProgressbar">
+						<span></span>
+					</div>
+					<div id="consultationStatistics" class="mui-slider-item mui-control-content mui-active">
+
+
+								<div class="mui-scroll-wrapper">
+									<ul id="consultationStatisticsList" class="mui-table-view">
+										<!-- 显示专家统计列表 -->
+									</ul>
+								</div>
+
+					</div>
+					<div id="siteStatistics" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper" style="margin-bottom: 25px;">
+							<div class="mui-scroll">
+								<div class="countLayout" style="border-bottom-style: solid; border-width: 1px; border-color: #c8c7cc; padding-top: 16px; background-color: white;">
+									<table style="width: 100%;">
+										<tr>
+											<td>
+												<p style="text-align: center; color: #51c4d4; line-height: 25px;font-size: 22px;" id="notDiagnosisSum">0例</p>
+												<p style="text-align: center; color: #51c4d4; line-height: 25px;">待诊断</p>
+											</td>
+											<td>
+												<p style="text-align: center; color: #51c4d4; line-height: 25px;font-size: 22px;" id="diagnosisSum">0例</p>
+												<p style="text-align: center; color: #51c4d4; line-height: 25px;">已诊断</p>
+											</td>
+											<td>
+												<p style="text-align: center; color: #51c4d4; line-height: 25px;font-size: 22px;" id="returnDiagnosisSum">0例</p>
+												<p style="text-align: center; color: #51c4d4; line-height: 25px;">退回</p>
+											</td>
+										</tr>
+									</table>
+								</div>
+								<ul id="siteDataLayout" class="mui-table-view">
+
+								</ul>
+							</div>
+						</div>
+						<div style="position: absolute; bottom: 0px; color: white; background-color: #3188DE; width: 100%;border-top:1px solid #3188DE ;z-index: 100;box-shadow: 0px -2px 4px #444444;" align="right">
+							<p style="font-size:18px ; line-height: 25px; padding-top:10px; color: white;">
+								共<span id="span_count"></span>例&nbsp;&nbsp;共计<span id="span_sum_money"></span>元&nbsp;&nbsp;
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 筛选Dialog: 专家 -->
+		<div id="selectExpertDialog" class="mui-popover selectDialog">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-content-padded">
+				<h4 id="title" style="text-align: center;margin-top: 10px;">查询</h4>
+				<div class="mui-input-row">
+					<input id="expertName" type="text" class="mui-input-clear" placeholder="诊断专家" style="font-size: 16px;padding: 4px;margin: 3px; width: 98%; height: 32px;">
+				</div>
+				<div class="mui-input-row">
+					<input id="year" type="text" class="mui-input-clear" placeholder="诊断年份" style="font-size: 16px;padding: 4px;margin: 3px; width: 98%; height: 32px;">
+				</div>
+				<div style="margin-top:10px; margin-right: 1px; width: 49%; float: left">
+					<button type="button" onclick="searchForExpert()" class="mui-btn mui-btn-primary mui-btn-block" style="">确定</button>
+				</div>
+				<div style="margin-top:10px; margin-left: 1px; width: 49%; float: left">
+					<button type="button" onclick="clearConditionForExpert()" class="mui-btn mui-btn-primary mui-btn-block" style="">清空</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- 筛选Dialog: 站点 -->
+		<div id="selectSiteDialog" class="mui-popover selectDialog" style="height: 370px;">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-content-padded">
+				<h4 id="title" style="text-align: center;margin-top: 10px;">查询</h4>
+				<div class="mui-input-row">
+					<h5 class="mui-content-padded">申请医院：</h5>
+					<button id="hospital_name" style="width: 98%;" onclick="showSitePop()" class="mui-btn mui-btn-block">全部医院</button>
+					<input type="hidden" id="tempId">
+
+					<h5 class="mui-content-padded">申请时间：</h5>
+					<button id="button_startTime" class="time_select" style="width: 98%;" class="mui-btn mui-btn-block">请选择开始时间</button>
+					<button id="button_endTime" class="time_select" style="width: 98%;" class="mui-btn mui-btn-block">请选择结束时间</button>
+
+					<h5 class="mui-content-padded">诊断时间：</h5>
+					<button id="button_diagnosisStartTime" class="time_select" style="width: 98%;" class="mui-btn mui-btn-block">请选择开始时间</button>
+					<button id="button_diagnosisEndTime" class="time_select" style="width: 98%;" class="mui-btn mui-btn-block">请选择结束时间</button>
+
+				</div>
+				<div style="margin-top:10px; margin-right: 1px; width: 49%; float: left">
+					<button type="button" onclick="searchForSite()" class="mui-btn mui-btn-primary mui-btn-block" style="">确定</button>
+				</div>
+				<div style="margin-top:10px; margin-left: 1px; width: 49%; float: left">
+					<button type="button" onclick="clearConditionForSite()" class="mui-btn mui-btn-primary mui-btn-block" style="">清空</button>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<!-- 专家统计 -->
+	<input type="hidden" id="hiddenStatisticsExpertName" />
+	<input type="hidden" id="hiddenStatisticsYear" />
+
+	<!-- 站点统计 -->
+	<input type="hidden" id="hiddenHospital" />
+	<input type="hidden" id="hiddenHospitalId" />
+	<input type="hidden" id="hiddenStartTime" />
+	<input type="hidden" id="hiddenEndTime" />
+	<input type="hidden" id="hiddenDiagnosisStartTime" />
+	<input type="hidden" id="hiddenDiagnosisEndTime" />
+
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/mui.lazyload.js"></script>
+	<script src="../js/mui.lazyload.img.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.min.js"></script>
+
+	<script type="text/javascript" src="Controller/distributionApi.js"></script>
+
+	<script type="text/javascript" src="Controller/const.js"></script>
+	<script type="text/javascript" src="Controller/UtilHelper.js"></script>
+	<script type="text/javascript" src="Controller/statistics_controller.js"></script>
+
+</html>
